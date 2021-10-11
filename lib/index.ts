@@ -20,7 +20,7 @@ export type TxData = {
   memo?: string
 }
 
-type Tx = {
+export type Tx = {
   timestamp: number
   sender: string
   recipient: string
@@ -36,7 +36,7 @@ type Tx = {
   confirmations: number
 }
 
-type TxsParams = {
+export type TxsParams = {
   above?: number
   since?: number
   page?: number

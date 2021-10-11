@@ -11,7 +11,7 @@ export declare type ListResponse<T> = {
 export declare type TxData = {
     memo?: string;
 };
-declare type Tx = {
+export declare type Tx = {
     timestamp: number;
     sender: string;
     recipient: string;
@@ -26,7 +26,7 @@ declare type Tx = {
     };
     confirmations: number;
 };
-declare type TxsParams = {
+export declare type TxsParams = {
     above?: number;
     since?: number;
     page?: number;
@@ -34,4 +34,3 @@ declare type TxsParams = {
 };
 export declare const transaction: (host: string, hash: string) => Promise<Tx>;
 export declare const transactions: (host: string, address?: string | undefined, params?: TxsParams | undefined) => Promise<ListResponse<Tx>>;
-export {};
