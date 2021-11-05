@@ -43,12 +43,15 @@ export type TxsParams = {
   limit?: number
 }
 
+// Get a transaction.
 export const transaction = async (host: string, hash: string): Promise<Tx> => {
   const url = `${host}/transaction/${hash}`
   const response = await superagent.get(url)
   return response.body as Tx
 }
 
+// Get transactions.
+// Pass a wallet address to get only transactions to/from that address.
 export const transactions = async (host: string, address?: string, params?: TxsParams): Promise<ListResponse<Tx>> => {
   let url = `${host}/transactions`
   if (address !== undefined) url += `/${address}`
