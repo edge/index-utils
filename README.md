@@ -15,12 +15,12 @@ Utility library for Index API
 
 ## Usage
 
-This library provides a collection of simple functions for querying the XE index API, which is an extended frontend for the XE blockchain proper.
+This library provides a collection of simple functions for querying the XE blockchain indexing API, which provides access to indexed blockchain data including wallet transactions, balances, blocks, and more.
 
 > API functions expect a `host` URL for the index API to be provided as the first argument. This must be provided without a trailing slash. The standard URLs are:
 >
-> - Mainnet: <https://index.xe.network/>
-> - Testnet: <https://index.test.network/>
+> - Mainnet: <https://index.xe.network>
+> - Testnet: <https://index.test.network>
 >
 > All code examples use the mainnet URL for simplicity.
 
