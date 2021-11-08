@@ -5,6 +5,9 @@
 import superagent from 'superagent'
 import { toQueryString } from './helpers'
 
+/**
+ * API response template for an index query.
+ */
 export type ListResponse<T> = {
   results: T[]
   metadata: {
@@ -16,10 +19,21 @@ export type ListResponse<T> = {
   }
 }
 
+/**
+ * Transaction data.
+ */
 export type TxData = {
+  action?: string
+  device?: string
+  express?: boolean
   memo?: string
+  stake?: string
 }
 
+/**
+ * Index transaction.
+ * A superset of the on-chain XE transaction.
+ */
 export type Tx = {
   timestamp: number
   sender: string

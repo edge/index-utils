@@ -9,7 +9,11 @@ export declare type ListResponse<T> = {
     };
 };
 export declare type TxData = {
+    action?: string;
+    device?: string;
+    express?: boolean;
     memo?: string;
+    stake?: string;
 };
 export declare type Tx = {
     timestamp: number;
