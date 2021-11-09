@@ -2,7 +2,7 @@
 
 # index-utils
 
-Utility library for Index API
+Utility library for XE index API
 
 [![npm version](https://img.shields.io/npm/v/@edge/index-utils)](https://www.npmjs.com/package/@edge/index-utils) [![npm downloads](https://img.shields.io/npm/dt/@edge/index-utils)](https://www.npmjs.com/package/@edge/index-utils) [![license](https://img.shields.io/npm/l/@edge/index-utils)](LICENSE.md)
 
