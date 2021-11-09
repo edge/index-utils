@@ -1,4 +1,7 @@
 "use strict";
+// Copyright (C) 2021 Edge Network Technologies Limited
+// Use of this source code is governed by a GNU GPL-style license
+// that can be found in the LICENSE.md file. All rights reserved.
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -42,20 +45,43 @@ exports.__esModule = true;
 exports.transactions = exports.transaction = void 0;
 var superagent_1 = __importDefault(require("superagent"));
 var helpers_1 = require("./helpers");
+/**
+ * Get a transaction.
+ *
+ * ```
+ * const tx = transaction('https://index.xe.network', 'some-tx-hash')
+ * ```
+ */
 var transaction = function (host, hash) { return __awaiter(void 0, void 0, void 0, function () {
     var url, response;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
                 url = host + "/transaction/" + hash;
-                return [4, superagent_1["default"].get(url)];
+                return [4 /*yield*/, superagent_1["default"].get(url)];
             case 1:
                 response = _a.sent();
-                return [2, response.body];
+                return [2 /*return*/, response.body];
         }
     });
 }); };
 exports.transaction = transaction;
+/**
+ * Get transactions.
+ *
+ * Pass a wallet address to get only transactions to/from that address.
+ *
+ * Optionally pass a third object argument to modify query parameters.
+ * See the `TxsParams` type for more detail.
+ *
+ * ```
+ * const allTxs = transactions('https://index.xe.network')
+ *
+ * const myTxs = transactions('https://index.xe.network', 'my-wallet-address')
+ *
+ * const pagedTxs = txs = await index.transactions('https://index.xe.network', undefined, { page: 2, limit: 5 })
+ * ```
+ */
 var transactions = function (host, address, params) { return __awaiter(void 0, void 0, void 0, function () {
     var url, response;
     return __generator(this, function (_a) {
@@ -66,10 +92,10 @@ var transactions = function (host, address, params) { return __awaiter(void 0, v
                     url += "/" + address;
                 if (params !== undefined)
                     url += "?" + (0, helpers_1.toQueryString)(params);
-                return [4, superagent_1["default"].get(url)];
+                return [4 /*yield*/, superagent_1["default"].get(url)];
             case 1:
                 response = _a.sent();
-                return [2, response.body];
+                return [2 /*return*/, response.body];
         }
     });
 }); };
