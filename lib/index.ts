@@ -20,17 +20,6 @@ export type ListResponse<T> = {
 }
 
 /**
- * Transaction data.
- */
-export type TxData = {
-  action?: string
-  device?: string
-  express?: boolean
-  memo?: string
-  stake?: string
-}
-
-/**
  * Index transaction.
  * A superset of the on-chain XE transaction.
  */
@@ -48,6 +37,46 @@ export type Tx = {
     hash: string
   }
   confirmations: number
+}
+
+/**
+ * Bridge transaction data.
+ * These values should only be set in exchange transactions created by Bridge.
+ */
+export type TxBridgeData = {
+  /** Ethereum address for withdrawal/sale transaction. Used by Bridge. */
+  destination?: string
+  /** Fee amount in an exchange transaction. Used by Bridge. */
+  fee?: number
+  /** Exchange rate reference for sale transaction. Used by Bridge. */
+  ref?: string
+}
+
+/**
+ * Transaction data.
+ */
+export type TxData = TxBridgeData & TxVarData & {
+  /** Blockchain action to be effected in the course of creating the transaction. */
+  action?: string
+  /** Device ID. Use with `action: DeviceAction` */
+  device?: string
+  /** Express unlock flag. Use with `action: "unlock_stake"` */
+  express?: boolean
+  /** Transaction memo. */
+  memo?: string
+  /** Stake ID. Use with `action: DeviceAction | "release_stake" | "unlock_stake"` */
+  stake?: string
+}
+
+/**
+ * Variables transaction data.
+ * These values should only be set by a blockchain custodian when updating on-chain variables.
+ */
+export type TxVarData = {
+  /** Variable name. Use with `action: VarAction` */
+  key?: string
+  /** Variable value. Use with `action: "set_var"` */
+  value?: unknown
 }
 
 export type TxsParams = {

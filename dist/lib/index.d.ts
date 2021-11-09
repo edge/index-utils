@@ -8,13 +8,6 @@ export declare type ListResponse<T> = {
         skip: number;
     };
 };
-export declare type TxData = {
-    action?: string;
-    device?: string;
-    express?: boolean;
-    memo?: string;
-    stake?: string;
-};
 export declare type Tx = {
     timestamp: number;
     sender: string;
@@ -29,6 +22,22 @@ export declare type Tx = {
         hash: string;
     };
     confirmations: number;
+};
+export declare type TxBridgeData = {
+    destination?: string;
+    fee?: number;
+    ref?: string;
+};
+export declare type TxData = TxBridgeData & TxVarData & {
+    action?: string;
+    device?: string;
+    express?: boolean;
+    memo?: string;
+    stake?: string;
+};
+export declare type TxVarData = {
+    key?: string;
+    value?: unknown;
 };
 export declare type TxsParams = {
     above?: number;
