@@ -26,11 +26,11 @@ This library provides a collection of simple functions for querying the XE block
 
 ### Transactions
 
-The current version of the library is very small and only has the ability to query transactions. This will be expanded in future to provide much more index API coverage.
+Use the `tx` component to query transactions.
 
 #### Get transactions
 
-`transactions()` gets a list of transactions, which can be filtered by wallet address, or a specific block, and certain other parameters.
+`tx.transactions()` gets a list of transactions, which can be filtered by wallet address, or a specific block, and certain other parameters.
 
 ```js
 const index = require('@edge/index-utils')
@@ -51,7 +51,7 @@ main()
 
 #### Get transaction by hash
 
-`transaction()` retrieves a single transaction by its hash.
+`tx.transaction()` retrieves a single transaction by its hash.
 
 ```js
 const index = require('@edge/index-utils')
