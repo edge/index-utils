@@ -2,10 +2,10 @@
 // Use of this source code is governed by a GNU GPL-style license
 // that can be found in the LICENSE.md file. All rights reserved.
 
-import { ListResponse } from '.'
 import { Tx } from './tx'
 import superagent from 'superagent'
 import { toQueryString } from './helpers'
+import { ListResponse, RequestCallback } from '.'
 
 export type AddressedStake = Stake & {
   tx: Omit<Tx, 'confirmations'>
@@ -41,9 +41,7 @@ export type StakesParams = {
 export type StakeType = 'gateway' | 'host' | 'stargate'
 
 /**
- * Get a list of transactions reflecting a stake's history.
- *
- * Optionally pass a third object argument to modify query parameters.
+ * Get a list of transactions reflecting the history of actions for a stake.
  *
  * ```
  * const h = await history('https://index.xe.network', 'some-stake-id')
@@ -52,11 +50,12 @@ export type StakeType = 'gateway' | 'host' | 'stargate'
 export const history = async (
   host: string,
   id: string,
-  params?: StakesParams
+  params?: StakesParams,
+  cb?: RequestCallback
 ): Promise<ListResponse<Tx, { id: string }>> => {
   let url = `${host}/stake/${id}/history`
   if (params !== undefined) url += `?${toQueryString(params)}`
-  const response = await superagent.get(url)
+  const response = cb === undefined ? await superagent.get(url) : await cb(superagent.get(url))
   return response.body
 }
 
@@ -67,9 +66,9 @@ export const history = async (
  * const s = await stake('https://index.xe.network', 'some-stake-id')
  * ```
  */
-export const stake = async (host: string, id: string): Promise<Stake> => {
+export const stake = async (host: string, id: string, cb?: RequestCallback): Promise<Stake> => {
   const url = `${host}/stake/${id}`
-  const response = await superagent.get(url)
+  const response = cb === undefined ? await superagent.get(url) : await cb(superagent.get(url))
   return response.body
 }
 
@@ -77,8 +76,6 @@ export const stake = async (host: string, id: string): Promise<Stake> => {
  * Get stakes.
  *
  * Provide an XE address to filter stakes by a single wallet.
- *
- * Optionally pass a third object argument to modify query parameters.
  *
  * ```
  * const allStakes = await stakes('https://index.xe.network')
@@ -91,11 +88,12 @@ export const stake = async (host: string, id: string): Promise<Stake> => {
 export const stakes = async (
   host: string,
   address?: string,
-  params?: StakesParams
+  params?: StakesParams,
+  cb?: RequestCallback
 ): Promise<ListResponse<AddressedStake, { address?: string }>> => {
   let url = `${host}/stakes`
   if (address !== undefined) url += `/${address}`
   if (params !== undefined) url += `?${toQueryString(params)}`
-  const response = await superagent.get(url)
+  const response = cb === undefined ? await superagent.get(url) : await cb(superagent.get(url))
   return response.body
 }

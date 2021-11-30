@@ -2,9 +2,9 @@
 // Use of this source code is governed by a GNU GPL-style license
 // that can be found in the LICENSE.md file. All rights reserved.
 
-import { ListResponse } from '.'
 import superagent from 'superagent'
 import { toQueryString } from './helpers'
+import { ListResponse, RequestCallback } from '.'
 
 /**
  * Index transaction.
@@ -80,18 +80,16 @@ export type TxsParams = {
  * const tx = await transaction('https://index.xe.network', 'some-tx-hash')
  * ```
  */
-export const transaction = async (host: string, hash: string): Promise<Tx> => {
+export const transaction = async (host: string, hash: string, cb?: RequestCallback): Promise<Tx> => {
   const url = `${host}/transaction/${hash}`
-  const response = await superagent.get(url)
-  return response.body as Tx
+  const response = cb === undefined ? await superagent.get(url) : await cb(superagent.get(url))
+  return response.body
 }
 
 /**
  * Get transactions.
  *
  * Pass a wallet address to get only transactions to/from that address.
- *
- * Optionally pass a third object argument to modify query parameters, including pagination.
  *
  * ```
  * const allTxs = await transactions('https://index.xe.network')
@@ -104,11 +102,12 @@ export const transaction = async (host: string, hash: string): Promise<Tx> => {
 export const transactions = async (
   host: string,
   address?: string,
-  params?: TxsParams
+  params?: TxsParams,
+  cb?: RequestCallback
 ): Promise<ListResponse<Tx, { page: number }>> => {
   let url = `${host}/transactions`
   if (address !== undefined) url += `/${address}`
   if (params !== undefined) url += `?${toQueryString(params)}`
-  const response = await superagent.get(url)
-  return response.body as ListResponse<Tx, { page: number }>
+  const response = cb === undefined ? await superagent.get(url) : await cb(superagent.get(url))
+  return response.body
 }
