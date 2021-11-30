@@ -33,16 +33,16 @@ Use the `tx` component to query transactions.
 `tx.transactions()` gets a list of transactions, which can be filtered by wallet address, or a specific block, and certain other parameters.
 
 ```js
-const index = require('@edge/index-utils')
+const { tx } = require('@edge/index-utils')
 
 async function main() {
-  let txs = await index.transactions('https://index.xe.network')
+  let txs = await tx.transactions('https://index.xe.network')
   console.log(JSON.stringify(txs))
 
-  txs = await index.transactions('https://index.xe.network', 'xe_ed9e05C9c85Ec8c46c333111a1C19035b5ECba99')
+  txs = await tx.transactions('https://index.xe.network', 'xe_ed9e05C9c85Ec8c46c333111a1C19035b5ECba99')
   console.log(JSON.stringify(txs))
 
-  txs = await index.transactions('https://index.xe.network', undefined, { page: 2, limit: 5 })
+  txs = await tx.transactions('https://index.xe.network', undefined, { page: 2, limit: 5 })
   console.log(JSON.stringify(txs))
 }
 
@@ -54,15 +54,89 @@ main()
 `tx.transaction()` retrieves a single transaction by its hash.
 
 ```js
-const index = require('@edge/index-utils')
+const { tx } = require('@edge/index-utils')
 
 async function main() {
-  let txs = await index.transaction('https://index.xe.network', '46e5631c4d711e9c3a56d8672446ba2b569efbcbff0a82ad579fe5f8660e8954')
-  console.log(JSON.stringify(txs))
+  const myTx = await tx.transaction('https://index.xe.network', '46e5631c4d711e9c3a56d8672446ba2b569efbcbff0a82ad579fe5f8660e8954')
+  console.log(JSON.stringify(myTx))
 }
 
 main()
 ```
+
+### Stakes
+
+Use the `stake` component to query stakes and their history.
+
+#### Get stakes
+
+`stake.stakes()` gets a list of stakes, which can be filtered by wallet address.
+
+```js
+const { stake } = require('@edge/index-utils')
+
+async function main() {
+  let stakes = await stake.stakes('https://index.xe.network')
+  console.log(JSON.stringify(stakes))
+
+  stakes = await stake.stakes('https://index.xe.network', 'xe_3F129e50310Ab4db5e3C7Eb79e177A40a8e9D319')
+  console.log(JSON.stringify(stakes))
+
+  stakes = await stake.stakes('https://index.xe.network', undefined, { skip: 10, limit: 5 })
+  console.log(JSON.stringify(stakes))
+}
+
+main()
+```
+
+#### Get stake by ID
+
+`stake.stake()` gets a single stake by ID.
+
+```js
+const { stake } = require('@edge/index-utils')
+
+async function main() {
+  const myStake = await stake.stake('https://index.xe.network', 'de189ce46ca195a10346a884fb974b3104dcddfaeefd1e20c577e6b19b54bf09')
+  console.log(JSON.stringify(myStake))
+}
+
+main()
+```
+
+> Be aware that a stake's ID is different than its hash. A stake's hash changes every time it is modified by an action. However, its ID always stays the same. You will normally use hash when querying the blockchain, and ID when querying the index.
+
+#### Get stake history
+
+`stake.history()` gets the history for a single stake. This provides insight into changes to a stake.
+
+```js
+const { stake } = require('@edge/index-utils')
+
+async function main() {
+  const hist = await stake.history('https://index.xe.network', 'de189ce46ca195a10346a884fb974b3104dcddfaeefd1e20c577e6b19b54bf09')
+  console.log(JSON.stringify(hist))
+}
+
+main()
+```
+
+### Request callbacks
+
+All API wrapper functions accept a `RequestCallback` as their final argument. This can be used to control request behaviour from your own code using [SuperAgent's chaining API](https://visionmedia.github.io/superagent/).
+
+For example, if you wanted to specify a 100ms timeout on a request for transactions, you could do:
+
+```js
+const { tx } = require('@edge/index-utils')
+
+async function main() {
+  let txs = await tx.transactions('https://index.xe.network', undefined, undefined, req => req.timeout(100))
+  console.log(JSON.stringify(txs))
+}
+```
+
+> Note that undefined arguments cannot be omitted, as we do not provide overloaded functions in this library. You can write your own wrapper to simplify this if you prefer.
 
 ## License
 
