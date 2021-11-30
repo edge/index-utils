@@ -2,22 +2,9 @@
 // Use of this source code is governed by a GNU GPL-style license
 // that can be found in the LICENSE.md file. All rights reserved.
 
+import { ListResponse } from '.'
 import superagent from 'superagent'
 import { toQueryString } from './helpers'
-
-/**
- * API response template for an index query.
- */
-export type ListResponse<T> = {
-  results: T[]
-  metadata: {
-    totalCount: number
-    count: number
-    page: number
-    limit: number
-    skip: number
-  }
-}
 
 /**
  * Index transaction.
@@ -90,7 +77,7 @@ export type TxsParams = {
  * Get a transaction.
  *
  * ```
- * const tx = transaction('https://index.xe.network', 'some-tx-hash')
+ * const tx = await transaction('https://index.xe.network', 'some-tx-hash')
  * ```
  */
 export const transaction = async (host: string, hash: string): Promise<Tx> => {
@@ -104,21 +91,24 @@ export const transaction = async (host: string, hash: string): Promise<Tx> => {
  *
  * Pass a wallet address to get only transactions to/from that address.
  *
- * Optionally pass a third object argument to modify query parameters.
- * See the `TxsParams` type for more detail.
+ * Optionally pass a third object argument to modify query parameters, including pagination.
  *
  * ```
- * const allTxs = transactions('https://index.xe.network')
+ * const allTxs = await transactions('https://index.xe.network')
  *
- * const myTxs = transactions('https://index.xe.network', 'my-wallet-address')
+ * const myTxs = await transactions('https://index.xe.network', 'my-wallet-address')
  *
- * const pagedTxs = txs = await index.transactions('https://index.xe.network', undefined, { page: 2, limit: 5 })
+ * const pagedTxs = await index.transactions('https://index.xe.network', undefined, { page: 2, limit: 5 })
  * ```
  */
-export const transactions = async (host: string, address?: string, params?: TxsParams): Promise<ListResponse<Tx>> => {
+export const transactions = async (
+  host: string,
+  address?: string,
+  params?: TxsParams
+): Promise<ListResponse<Tx, { page: number }>> => {
   let url = `${host}/transactions`
   if (address !== undefined) url += `/${address}`
   if (params !== undefined) url += `?${toQueryString(params)}`
   const response = await superagent.get(url)
-  return response.body as ListResponse<Tx>
+  return response.body as ListResponse<Tx, { page: number }>
 }
