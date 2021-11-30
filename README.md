@@ -11,6 +11,10 @@ Utility library for XE index API
     - [Transactions](#transactions)
     - [Get transactions](#get-transactions)
     - [Get transaction by hash](#get-transaction-by-hash)
+    - [Stakes](#stakes)
+    - [Get stakes](#get-stakes)
+    - [Get stake by ID](#get-stake-by-id)
+    - [Get stake history](#get-stake-history)
   - [License](#license)
 
 ## Usage
