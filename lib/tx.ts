@@ -37,6 +37,8 @@ export type TxBridgeData = {
   fee?: number
   /** Exchange rate reference for sale transaction. Used by Bridge. */
   ref?: string
+  /** Exchange token. Used by Bridge. */
+  token?: string
 }
 
 /**
