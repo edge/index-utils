@@ -29,6 +29,8 @@ export declare type TxBridgeData = {
     fee?: number;
     /** Exchange rate reference for sale transaction. Used by Bridge. */
     ref?: string;
+    /** Exchange token. Used by Bridge. */
+    token?: string;
 };
 /**
  * Transaction data.
@@ -60,6 +62,7 @@ export declare type TxsParams = {
     since?: number;
     page?: number;
     limit?: number;
+    type?: string;
 };
 /**
  * Get a transaction.
