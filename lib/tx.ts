@@ -71,6 +71,7 @@ export type TxsParams = {
   since?: number
   page?: number
   limit?: number
+  type?: string
 }
 
 /**
