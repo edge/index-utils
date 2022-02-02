@@ -35,7 +35,7 @@ export type Stake = {
 
 export type StakesParams = {
   limit?: number
-  skip?: number
+  page?: number
 }
 
 export type StakeType = 'gateway' | 'host' | 'stargate'
