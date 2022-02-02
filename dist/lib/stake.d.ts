@@ -25,7 +25,7 @@ export declare type Stake = {
 };
 export declare type StakesParams = {
     limit?: number;
-    skip?: number;
+    page?: number;
 };
 export declare type StakeType = 'gateway' | 'host' | 'stargate';
 /**
