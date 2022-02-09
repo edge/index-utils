@@ -11,6 +11,10 @@ export type AddressedStake = Stake & {
   tx: Omit<Tx, 'confirmations'>
 }
 
+export type SingleStake = Stake & {
+  wallet: string
+}
+
 export type Stake = {
   amount: number
   created: number
@@ -26,7 +30,6 @@ export type Stake = {
   unlockPeriod: number
   unlockRequested?: number
   unlockTransaction?: string
-
   block: {
     hash: string
     height: number
@@ -66,7 +69,7 @@ export const history = async (
  * const s = await stake('https://index.xe.network', 'some-stake-id')
  * ```
  */
-export const stake = async (host: string, id: string, cb?: RequestCallback): Promise<Stake> => {
+export const stake = async (host: string, id: string, cb?: RequestCallback): Promise<SingleStake> => {
   const url = `${host}/stake/${id}`
   const response = cb === undefined ? await superagent.get(url) : await cb(superagent.get(url))
   return response.body
