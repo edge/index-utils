@@ -3,6 +3,9 @@ import { ListResponse, RequestCallback } from '.';
 export declare type AddressedStake = Stake & {
     tx: Omit<Tx, 'confirmations'>;
 };
+export declare type SingleStake = Stake & {
+    wallet: string;
+};
 export declare type Stake = {
     amount: number;
     created: number;
@@ -45,7 +48,7 @@ export declare const history: (host: string, id: string, params?: StakesParams |
  * const s = await stake('https://index.xe.network', 'some-stake-id')
  * ```
  */
-export declare const stake: (host: string, id: string, cb?: RequestCallback | undefined) => Promise<Stake>;
+export declare const stake: (host: string, id: string, cb?: RequestCallback | undefined) => Promise<SingleStake>;
 /**
  * Get stakes.
  *
