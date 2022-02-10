@@ -12,7 +12,15 @@ export type AddressedStake = Stake & {
 }
 
 export type SingleStake = Stake & {
+  /** Wallet address for stake holder */
   wallet: string
+  /**
+   * Index only provides the latest stake data, reflecting its last change.
+   * However, you can still retrieve a stake using an outdated hash, in which event this flag will be `true` to
+   * signify that the hash in your request is not directly represented in the provided stake data.
+   * If you need it, you can get the original stake data as of that hash directly from the XE blockchain.
+   */
+  outdatedHash?: true
 }
 
 export type Stake = {
@@ -63,14 +71,17 @@ export const history = async (
 }
 
 /**
- * Get a stake by ID.
+ * Get a stake by ID or hash.
+ *
+ * Some extra metadata is attached to stakes retrieved directly through this method.
+ * See the `SingleStake` type for more information.
  *
  * ```
  * const s = await stake('https://index.xe.network', 'some-stake-id')
  * ```
  */
-export const stake = async (host: string, id: string, cb?: RequestCallback): Promise<SingleStake> => {
-  const url = `${host}/stake/${id}`
+export const stake = async (host: string, ref: string, cb?: RequestCallback): Promise<SingleStake> => {
+  const url = `${host}/stake/${ref}`
   const response = cb === undefined ? await superagent.get(url) : await cb(superagent.get(url))
   return response.body
 }
