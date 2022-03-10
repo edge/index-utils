@@ -1,3 +1,4 @@
+export * as session from './session';
 export * as stake from './stake';
 export * as tx from './tx';
 import { SuperAgentRequest } from 'superagent';
