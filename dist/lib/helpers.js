@@ -6,7 +6,12 @@ exports.__esModule = true;
 exports.urlsafe = exports.toQueryString = void 0;
 // Transform any simple object into a query string for use in URLs.
 var toQueryString = function (data) { return Object.keys(data)
-    .map(function (key) { return key + "=" + (0, exports.urlsafe)(data[key]); })
+    .map(function (key) {
+    var v = data[key];
+    if (v instanceof Array)
+        return key + "=" + v.map(exports.urlsafe).join(',');
+    return key + "=" + (0, exports.urlsafe)(v);
+})
     .join('&'); };
 exports.toQueryString = toQueryString;
 // Sanitize a value for use in URLs.
