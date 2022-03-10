@@ -67,7 +67,17 @@ export declare const isClosed: (session: Session) => boolean;
  */
 export declare const isOpen: (session: Session) => boolean;
 /**
- * Get active sessions.
+ * Get a device's current or most recent session.
+ *
+ * ```
+ * const nodeSession = await session('https://index.xe.network', 'xe_a1b2c3...')
+ * ```
+ */
+export declare const session: (host: string, address: string, cb?: RequestCallback | undefined) => Promise<Session>;
+/**
+ * Get sessions.
+ *
+ * This retrieves the current or most recent session for each device.
  *
  * ```
  * const nodeSessions = await sessions('https://index.xe.network')
