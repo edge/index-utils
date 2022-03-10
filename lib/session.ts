@@ -56,6 +56,11 @@ export type Session = {
    * This is provided mainly for sorting purposes.
    */
   lastSeen?: number
+  /**
+   * Percentage availability (as a decimal).
+   * This reflects device uptime over the last 24 hours [that it was online].
+   */
+  availability?: number
 }
 
 export type SessionsParams = {
