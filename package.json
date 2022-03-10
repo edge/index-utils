@@ -1,6 +1,6 @@
 {
   "name": "@edge/index-utils",
-  "version": "0.3.5",
+  "version": "0.4.0",
   "description": "Utility library for Index API",
   "main": "dist/lib/index.js",
   "author": "Edge Network <core@edge.network>",
