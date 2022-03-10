@@ -80,17 +80,28 @@ export const isClosed = (session: Session): boolean => !isOpen(session)
 export const isOpen = (session: Session): boolean => session.end === undefined
 
 /**
- * Get active sessions.
+ * Get a device's current or most recent session.
+ *
+ * ```
+ * const nodeSession = await session('https://index.xe.network', 'xe_a1b2c3...')
+ * ```
+ */
+export const session = async (host: string, address: string, cb?: RequestCallback): Promise<Session> => {
+  const url = `${host}/session/${address}`
+  const response = cb === undefined ? await superagent.get(url) : await cb(superagent.get(url))
+  return response.body
+}
+
+/**
+ * Get sessions.
+ *
+ * This retrieves the current or most recent session for each device.
  *
  * ```
  * const nodeSessions = await sessions('https://index.xe.network')
  * ```
  */
-export const sessions = async (
-  host: string,
-  params?: SessionsParams,
-  cb?: RequestCallback
-): Promise<Session[]> => {
+export const sessions = async (host: string, params?: SessionsParams, cb?: RequestCallback): Promise<Session[]> => {
   let url = `${host}/sessions`
   if (params !== undefined) url += `?${toQueryString(params)}`
   const response = cb === undefined ? await superagent.get(url) : await cb(superagent.get(url))

@@ -17,6 +17,7 @@ Utility library for XE index API
       - [Get stake history](#get-stake-history)
     - [Sessions](#sessions)
       - [Get sessions](#get-sessions)
+      - [Get session by device address](#get-session-by-device-address)
   - [License](#license)
 
 ## Usage
@@ -141,6 +142,23 @@ const { session } = require('@edge/index-utils')
 async function main() {
   const sessions = await session.sessions('https://index.xe.network')
   console.log(JSON.stringify(sessions))
+}
+
+main()
+```
+
+#### Get session by device address
+
+`session.session()` gets the current or most recent session for a given device address.
+
+> This is not a working example; a valid XE address is required.
+
+```js
+const { session } = require('@edge/index-utils')
+
+async function main() {
+  const sess = await session.sessions('https://index.xe.network', 'xe_a1b2c3...')
+  console.log(JSON.stringify(sess))
 }
 
 main()
