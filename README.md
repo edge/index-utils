@@ -9,12 +9,14 @@ Utility library for XE index API
 - [index-utils](#index-utils)
   - [Usage](#usage)
     - [Transactions](#transactions)
-    - [Get transactions](#get-transactions)
-    - [Get transaction by hash](#get-transaction-by-hash)
+      - [Get transactions](#get-transactions)
+      - [Get transaction by hash](#get-transaction-by-hash)
     - [Stakes](#stakes)
-    - [Get stakes](#get-stakes)
-    - [Get stake by ID](#get-stake-by-id)
-    - [Get stake history](#get-stake-history)
+      - [Get stakes](#get-stakes)
+      - [Get stake by ID](#get-stake-by-id)
+      - [Get stake history](#get-stake-history)
+    - [Sessions](#sessions)
+      - [Get sessions](#get-sessions)
   - [License](#license)
 
 ## Usage
@@ -120,6 +122,25 @@ const { stake } = require('@edge/index-utils')
 async function main() {
   const hist = await stake.history('https://index.xe.network', 'de189ce46ca195a10346a884fb974b3104dcddfaeefd1e20c577e6b19b54bf09')
   console.log(JSON.stringify(hist))
+}
+
+main()
+```
+
+### Sessions
+
+Use the `session` component to query devices on the network.
+
+#### Get sessions
+
+`session.sessions()` gets the latest session for each device on the network.
+
+```js
+const { session } = require('@edge/index-utils')
+
+async function main() {
+  const sessions = await session.sessions('https://index.xe.network')
+  console.log(JSON.stringify(sessions))
 }
 
 main()

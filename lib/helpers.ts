@@ -4,7 +4,11 @@
 
 // Transform any simple object into a query string for use in URLs.
 export const toQueryString = (data: Record<string, unknown>): string => Object.keys(data)
-  .map(key => `${key}=${urlsafe(data[key])}`)
+  .map(key => {
+    const v = data[key]
+    if (v instanceof Array) return `${key}=${v.map(urlsafe).join(',')}`
+    return `${key}=${urlsafe(v)}`
+  })
   .join('&')
 
 // Sanitize a value for use in URLs.
