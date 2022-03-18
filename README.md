@@ -134,13 +134,16 @@ Use the `session` component to query devices on the network.
 
 #### Get sessions
 
-`session.sessions()` gets the latest session for each device on the network.
+`session.sessions()` gets the latest session for each device on the network, which can be filtered by wallet address.
 
 ```js
 const { session } = require('@edge/index-utils')
 
 async function main() {
   const sessions = await session.sessions('https://index.xe.network')
+  console.log(JSON.stringify(sessions))
+
+  const sessions = await session.sessions('https://index.xe.network', 'xe_3F129e50310Ab4db5e3C7Eb79e177A40a8e9D319')
   console.log(JSON.stringify(sessions))
 }
 
@@ -157,7 +160,7 @@ main()
 const { session } = require('@edge/index-utils')
 
 async function main() {
-  const sess = await session.sessions('https://index.xe.network', 'xe_a1b2c3...')
+  const sess = await session.session('https://index.xe.network', 'xe_a1b2c3...')
   console.log(JSON.stringify(sess))
 }
 
