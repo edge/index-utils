@@ -57,7 +57,7 @@ var transaction = function (host, hash, cb) { return __awaiter(void 0, void 0, v
     return __generator(this, function (_b) {
         switch (_b.label) {
             case 0:
-                url = host + "/transaction/" + hash;
+                url = "".concat(host, "/transaction/").concat(hash);
                 if (!(cb === undefined)) return [3 /*break*/, 2];
                 return [4 /*yield*/, superagent_1["default"].get(url)];
             case 1:
@@ -92,11 +92,11 @@ var transactions = function (host, address, params, cb) { return __awaiter(void 
     return __generator(this, function (_b) {
         switch (_b.label) {
             case 0:
-                url = host + "/transactions";
+                url = "".concat(host, "/transactions");
                 if (address !== undefined)
-                    url += "/" + address;
+                    url += "/".concat(address);
                 if (params !== undefined)
-                    url += "?" + (0, helpers_1.toQueryString)(params);
+                    url += "?".concat((0, helpers_1.toQueryString)(params));
                 if (!(cb === undefined)) return [3 /*break*/, 2];
                 return [4 /*yield*/, superagent_1["default"].get(url)];
             case 1:

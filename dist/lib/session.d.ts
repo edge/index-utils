@@ -1,4 +1,4 @@
-import { RequestCallback } from '.';
+import { ListResponse, RequestCallback } from '.';
 /**
  * Geolocation data.
  */
@@ -83,4 +83,6 @@ export declare const session: (host: string, address: string, cb?: RequestCallba
  * const nodeSessions = await sessions('https://index.xe.network')
  * ```
  */
-export declare const sessions: (host: string, params?: SessionsParams | undefined, cb?: RequestCallback | undefined) => Promise<Session[]>;
+export declare const sessions: (host: string, wallet?: string | undefined, params?: SessionsParams | undefined, cb?: RequestCallback | undefined) => Promise<ListResponse<Session, {
+    wallet?: string | undefined;
+}>>;

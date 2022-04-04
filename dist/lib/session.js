@@ -67,7 +67,7 @@ var session = function (host, address, cb) { return __awaiter(void 0, void 0, vo
     return __generator(this, function (_b) {
         switch (_b.label) {
             case 0:
-                url = host + "/session/" + address;
+                url = "".concat(host, "/session/").concat(address);
                 if (!(cb === undefined)) return [3 /*break*/, 2];
                 return [4 /*yield*/, superagent_1["default"].get(url)];
             case 1:
@@ -93,14 +93,16 @@ exports.session = session;
  * const nodeSessions = await sessions('https://index.xe.network')
  * ```
  */
-var sessions = function (host, params, cb) { return __awaiter(void 0, void 0, void 0, function () {
+var sessions = function (host, wallet, params, cb) { return __awaiter(void 0, void 0, void 0, function () {
     var url, response, _a;
     return __generator(this, function (_b) {
         switch (_b.label) {
             case 0:
-                url = host + "/sessions";
+                url = "".concat(host, "/sessions");
+                if (wallet !== undefined)
+                    url += "/".concat(wallet);
                 if (params !== undefined)
-                    url += "?" + (0, helpers_1.toQueryString)(params);
+                    url += "?".concat((0, helpers_1.toQueryString)(params));
                 if (!(cb === undefined)) return [3 /*break*/, 2];
                 return [4 /*yield*/, superagent_1["default"].get(url)];
             case 1:

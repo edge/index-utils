@@ -2,9 +2,9 @@
 // Use of this source code is governed by a GNU GPL-style license
 // that can be found in the LICENSE.md file. All rights reserved.
 
-import { RequestCallback } from '.'
 import superagent from 'superagent'
 import { toQueryString } from './helpers'
+import { ListResponse, RequestCallback } from '.'
 
 /**
  * Geolocation data.
@@ -101,8 +101,14 @@ export const session = async (host: string, address: string, cb?: RequestCallbac
  * const nodeSessions = await sessions('https://index.xe.network')
  * ```
  */
-export const sessions = async (host: string, params?: SessionsParams, cb?: RequestCallback): Promise<Session[]> => {
+export const sessions = async (
+  host: string,
+  wallet?: string,
+  params?: SessionsParams,
+  cb?: RequestCallback
+): Promise<ListResponse<Session, { wallet?: string }>> => {
   let url = `${host}/sessions`
+  if (wallet !== undefined) url += `/${wallet}`
   if (params !== undefined) url += `?${toQueryString(params)}`
   const response = cb === undefined ? await superagent.get(url) : await cb(superagent.get(url))
   return response.body
