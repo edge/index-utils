@@ -57,9 +57,9 @@ var history = function (host, id, params, cb) { return __awaiter(void 0, void 0,
     return __generator(this, function (_b) {
         switch (_b.label) {
             case 0:
-                url = host + "/stake/" + id + "/history";
+                url = "".concat(host, "/stake/").concat(id, "/history");
                 if (params !== undefined)
-                    url += "?" + (0, helpers_1.toQueryString)(params);
+                    url += "?".concat((0, helpers_1.toQueryString)(params));
                 if (!(cb === undefined)) return [3 /*break*/, 2];
                 return [4 /*yield*/, superagent_1["default"].get(url)];
             case 1:
@@ -91,7 +91,7 @@ var stake = function (host, ref, cb) { return __awaiter(void 0, void 0, void 0, 
     return __generator(this, function (_b) {
         switch (_b.label) {
             case 0:
-                url = host + "/stake/" + ref;
+                url = "".concat(host, "/stake/").concat(ref);
                 if (!(cb === undefined)) return [3 /*break*/, 2];
                 return [4 /*yield*/, superagent_1["default"].get(url)];
             case 1:
@@ -126,11 +126,11 @@ var stakes = function (host, address, params, cb) { return __awaiter(void 0, voi
     return __generator(this, function (_b) {
         switch (_b.label) {
             case 0:
-                url = host + "/stakes";
+                url = "".concat(host, "/stakes");
                 if (address !== undefined)
-                    url += "/" + address;
+                    url += "/".concat(address);
                 if (params !== undefined)
-                    url += "?" + (0, helpers_1.toQueryString)(params);
+                    url += "?".concat((0, helpers_1.toQueryString)(params));
                 if (!(cb === undefined)) return [3 /*break*/, 2];
                 return [4 /*yield*/, superagent_1["default"].get(url)];
             case 1:

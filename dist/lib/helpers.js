@@ -9,8 +9,8 @@ var toQueryString = function (data) { return Object.keys(data)
     .map(function (key) {
     var v = data[key];
     if (v instanceof Array)
-        return key + "=" + v.map(exports.urlsafe).join(',');
-    return key + "=" + (0, exports.urlsafe)(v);
+        return "".concat(key, "=").concat(v.map(exports.urlsafe).join(','));
+    return "".concat(key, "=").concat((0, exports.urlsafe)(v));
 })
     .join('&'); };
 exports.toQueryString = toQueryString;
@@ -18,6 +18,6 @@ exports.toQueryString = toQueryString;
 var urlsafe = function (v) {
     if (typeof v === 'string')
         return v.replace(/ /g, '%20');
-    return "" + v;
+    return "".concat(v);
 };
 exports.urlsafe = urlsafe;
