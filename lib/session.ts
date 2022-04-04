@@ -2,9 +2,9 @@
 // Use of this source code is governed by a GNU GPL-style license
 // that can be found in the LICENSE.md file. All rights reserved.
 
-import { RequestCallback } from '.'
 import superagent from 'superagent'
 import { toQueryString } from './helpers'
+import { ListResponse, RequestCallback } from '.'
 
 /**
  * Geolocation data.
@@ -106,7 +106,7 @@ export const sessions = async (
   wallet?: string,
   params?: SessionsParams,
   cb?: RequestCallback
-): Promise<ListResponse<Session, { wallet? : string }>> => {
+): Promise<ListResponse<Session, { wallet?: string }>> => {
   let url = `${host}/sessions`
   if (wallet !== undefined) url += `/${wallet}`
   if (params !== undefined) url += `?${toQueryString(params)}`
