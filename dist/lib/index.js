@@ -22,8 +22,9 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 exports.__esModule = true;
-exports.tx = exports.stake = exports.session = exports.exchangeRate = void 0;
+exports.tx = exports.token = exports.stake = exports.session = exports.exchangeRate = void 0;
 exports.exchangeRate = __importStar(require("./exchangeRate"));
 exports.session = __importStar(require("./session"));
 exports.stake = __importStar(require("./stake"));
+exports.token = __importStar(require("./token"));
 exports.tx = __importStar(require("./tx"));

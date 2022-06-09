@@ -20,6 +20,8 @@ Utility library for XE index API
       - [Get session by device address](#get-session-by-device-address)
     - [Exchange Rate](#exchange-rate)
       - [Get current exchange rate](#get-current-exchange-rate)
+    - [Token](#token)
+      - [Get current token value](#get-current-token-value)
   - [License](#license)
 
 ## Usage
@@ -183,6 +185,25 @@ const { exchangeRate } = require('@edge/index-utils')
 async function main() {
   const xr = await exchangeRate.current('https://index.xe.network')
   console.log(JSON.stringify(xr))
+}
+
+main()
+```
+
+### Token
+
+Use the `token` component to query token data.
+
+#### Get current token value
+
+`token.current()` gets the current token value.
+
+```js
+const { token } = require('@edge/index-utils')
+
+async function main() {
+  const tv = await token.current('https://index.xe.network')
+  console.log(JSON.stringify(tv))
 }
 
 main()

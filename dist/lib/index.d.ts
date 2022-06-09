@@ -1,6 +1,7 @@
 export * as exchangeRate from './exchangeRate';
 export * as session from './session';
 export * as stake from './stake';
+export * as token from './token';
 export * as tx from './tx';
 import { SuperAgentRequest } from 'superagent';
 /**
