@@ -18,6 +18,8 @@ Utility library for XE index API
     - [Sessions](#sessions)
       - [Get sessions](#get-sessions)
       - [Get session by device address](#get-session-by-device-address)
+    - [Exchange Rate](#exchange-rate)
+      - [Get current exchange rate](#get-current-exchange-rate)
   - [License](#license)
 
 ## Usage
@@ -162,6 +164,25 @@ const { session } = require('@edge/index-utils')
 async function main() {
   const sess = await session.session('https://index.xe.network', 'xe_a1b2c3...')
   console.log(JSON.stringify(sess))
+}
+
+main()
+```
+
+### Exchange Rate
+
+Use the `exchangeRate` component to query exchange rate data.
+
+#### Get current exchange rate
+
+`exchangeRate.current()` gets the current exchange rate data.
+
+```js
+const { exchangeRate } = require('@edge/index-utils')
+
+async function main() {
+  const xr = await exchangeRate.current('https://index.xe.network')
+  console.log(JSON.stringify(xr))
 }
 
 main()

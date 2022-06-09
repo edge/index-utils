@@ -2,6 +2,7 @@
 // Use of this source code is governed by a GNU GPL-style license
 // that can be found in the LICENSE.md file. All rights reserved.
 
+export * as exchangeRate from './exchangeRate'
 export * as session from './session'
 export * as stake from './stake'
 export * as tx from './tx'
