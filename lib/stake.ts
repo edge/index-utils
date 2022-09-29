@@ -47,6 +47,7 @@ export type Stake = {
 export type StakesParams = {
   limit?: number
   page?: number
+  hideReleased?: boolean
 }
 
 export type StakeType = 'gateway' | 'host' | 'stargate'
