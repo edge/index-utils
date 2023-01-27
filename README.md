@@ -75,6 +75,58 @@ async function main() {
 main()
 ```
 
+### Burns
+
+Use the `burn` component to query burns.
+
+#### Get burns
+
+`burn.burns()` gets a list of burns, which can be filtered by page.
+
+```js
+const { burn } = require('@edge/index-utils')
+
+async function main() {
+  let burns = await burn.burns('https://index.xe.network')
+  console.log(JSON.stringify(burns))
+
+  burns = await burn.burns('https://index.xe.network', { page: 2, limit: 5 })
+  console.log(JSON.stringify(burns))
+}
+
+main()
+```
+
+#### Get burn by hash
+
+`burn.burn()` retrieves a single burn by its hash.
+
+```js
+const { burn } = require('@edge/index-utils')
+
+async function main() {
+  const myBurn = await burn.burn('https://index.xe.network', '46e5631c4d711e9c3a56d8672446ba2b569efbcbff0a82ad579fe5f8660e8954')
+  console.log(JSON.stringify(myBurn))
+}
+
+main()
+```
+
+#### Get burn stats
+
+`burn.stats()` retrieves network stats for burns, including burn counts and burn amounts for all time and last 30 days.
+
+```js
+const { burn } = require('@edge/index-utils')
+
+async function main() {
+  const burnStats = await burn.stats('https://index.xe.network')
+  console.log(JSON.stringify(burnStats))
+}
+
+main()
+```
+
 ### Stakes
 
 Use the `stake` component to query stakes and their history.
