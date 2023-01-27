@@ -47,7 +47,7 @@ export declare type StakeType = 'gateway' | 'host' | 'stargate';
  * const h = await history('https://index.xe.network', 'some-stake-id')
  * ```
  */
-export declare const history: (host: string, id: string, params?: StakesParams, cb?: RequestCallback) => Promise<ListResponse<Tx, {
+export declare const history: (host: string, id: string, params?: StakesParams | undefined, cb?: RequestCallback | undefined) => Promise<ListResponse<Tx, {
     id: string;
 }>>;
 /**
@@ -60,7 +60,7 @@ export declare const history: (host: string, id: string, params?: StakesParams, 
  * const s = await stake('https://index.xe.network', 'some-stake-id')
  * ```
  */
-export declare const stake: (host: string, ref: string, cb?: RequestCallback) => Promise<SingleStake>;
+export declare const stake: (host: string, ref: string, cb?: RequestCallback | undefined) => Promise<SingleStake>;
 /**
  * Get stakes.
  *
@@ -74,6 +74,6 @@ export declare const stake: (host: string, ref: string, cb?: RequestCallback) =>
  * const pagedStakes = await index.transactions('https://index.xe.network', undefined, { skip: 10, limit: 5 })
  * ```
  */
-export declare const stakes: (host: string, address?: string, params?: StakesParams, cb?: RequestCallback) => Promise<ListResponse<AddressedStake, {
+export declare const stakes: (host: string, address?: string | undefined, params?: StakesParams | undefined, cb?: RequestCallback | undefined) => Promise<ListResponse<AddressedStake, {
     address?: string | undefined;
 }>>;

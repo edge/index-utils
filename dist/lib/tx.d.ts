@@ -71,7 +71,7 @@ export declare type TxsParams = {
  * const tx = await transaction('https://index.xe.network', 'some-tx-hash')
  * ```
  */
-export declare const transaction: (host: string, hash: string, cb?: RequestCallback) => Promise<Tx>;
+export declare const transaction: (host: string, hash: string, cb?: RequestCallback | undefined) => Promise<Tx>;
 /**
  * Get transactions.
  *
@@ -85,6 +85,6 @@ export declare const transaction: (host: string, hash: string, cb?: RequestCallb
  * const pagedTxs = await index.transactions('https://index.xe.network', undefined, { page: 2, limit: 5 })
  * ```
  */
-export declare const transactions: (host: string, address?: string, params?: TxsParams, cb?: RequestCallback) => Promise<ListResponse<Tx, {
+export declare const transactions: (host: string, address?: string | undefined, params?: TxsParams | undefined, cb?: RequestCallback | undefined) => Promise<ListResponse<Tx, {
     page: number;
 }>>;

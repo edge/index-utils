@@ -1,3 +1,4 @@
+export * as burn from './burn';
 export * as exchangeRate from './exchangeRate';
 export * as session from './session';
 export * as stake from './stake';
