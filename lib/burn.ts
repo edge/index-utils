@@ -48,7 +48,7 @@ export type BurnsParams = {
  * ```
  */
 export const burn = async (host: string, hash: string, cb?: RequestCallback): Promise<Burn> => {
-  const url = `${host}/v2/burn/${hash}`
+  const url = `${host}/v2/burns/${hash}`
   const response = cb === undefined ? await superagent.get(url) : await cb(superagent.get(url))
   return response.body
 }
