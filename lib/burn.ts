@@ -67,7 +67,7 @@ export const burns = async (
   params?: BurnsParams,
   cb?: RequestCallback
 ): Promise<ListResponse<Burn, { page: number }>> => {
-  let url = `${host}/burns`
+  let url = `${host}/v2/burns`
   if (params !== undefined) url += `?${toQueryString(params)}`
   const response = cb === undefined ? await superagent.get(url) : await cb(superagent.get(url))
   return response.body
@@ -84,7 +84,7 @@ export const stats = async (
   host: string,
   cb?: RequestCallback
 ): Promise<ListResponse<BurnStats>> => {
-  const url = `${host}/burns/stats`
+  const url = `${host}/v2/burns/stats`
   const response = cb === undefined ? await superagent.get(url) : await cb(superagent.get(url))
   return response.body
 }
