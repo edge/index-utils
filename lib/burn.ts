@@ -17,7 +17,10 @@ export type Burn = {
   parentTx: string
   type: string
   hash: string
-  pending?: boolean
+  block?: {
+    height: number
+    hash: string
+  }
 }
 
 /**
