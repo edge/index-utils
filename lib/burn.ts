@@ -84,7 +84,7 @@ export const stats = async (
   host: string,
   cb?: RequestCallback
 ): Promise<ListResponse<BurnStats>> => {
-  const url = `${host}/v2/burns/stats`
+  const url = `${host}/v2/stats/burns`
   const response = cb === undefined ? await superagent.get(url) : await cb(superagent.get(url))
   return response.body
 }
