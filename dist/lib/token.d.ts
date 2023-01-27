@@ -17,4 +17,4 @@ export declare type Value = {
  * const rate = await current('https://index.xe.network')
  * ```
  */
-export declare const current: (host: string, cb?: RequestCallback) => Promise<Value>;
+export declare const current: (host: string, cb?: RequestCallback | undefined) => Promise<Value>;

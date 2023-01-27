@@ -73,7 +73,7 @@ export declare const isOpen: (session: Session) => boolean;
  * const nodeSession = await session('https://index.xe.network', 'xe_a1b2c3...')
  * ```
  */
-export declare const session: (host: string, address: string, cb?: RequestCallback) => Promise<Session>;
+export declare const session: (host: string, address: string, cb?: RequestCallback | undefined) => Promise<Session>;
 /**
  * Get sessions.
  *
@@ -83,6 +83,6 @@ export declare const session: (host: string, address: string, cb?: RequestCallba
  * const nodeSessions = await sessions('https://index.xe.network')
  * ```
  */
-export declare const sessions: (host: string, wallet?: string, params?: SessionsParams, cb?: RequestCallback) => Promise<ListResponse<Session, {
+export declare const sessions: (host: string, wallet?: string | undefined, params?: SessionsParams | undefined, cb?: RequestCallback | undefined) => Promise<ListResponse<Session, {
     wallet?: string | undefined;
 }>>;
