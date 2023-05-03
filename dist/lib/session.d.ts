@@ -2,7 +2,7 @@ import { ListResponse, RequestCallback } from '.';
 /**
  * Geolocation data.
  */
-export declare type Geolocation = {
+export type Geolocation = {
     city?: string;
     country?: string;
     countryCode?: string;
@@ -10,9 +10,27 @@ export declare type Geolocation = {
     lng?: number;
 };
 /**
+ * Host usage metrics.
+ */
+export type Metrics = {
+    messages: number;
+    cdn: {
+        requests: number;
+        data: {
+            in: number;
+            out: number;
+        };
+        timing: {
+            download: number;
+            processing: number;
+            total: number;
+        };
+    };
+};
+/**
  * Information about a node.
  */
-export declare type Node = {
+export type Node = {
     /** Node type will be `host`, `gateway`, or `stargate` */
     type: string;
     /** Version of node */
@@ -36,24 +54,20 @@ export declare type Node = {
  *
  * You may use the convenience functions `isClosed` and `isOpen` to disambiguate.
  */
-export declare type Session = {
+export type Session = {
     node: Node;
     start: number;
     lastActive?: number;
     end?: number;
     /**
-     * When the device was last seen online.
-     * This matches `lastActive` or `end` depending on whether the session is open or closed.
-     * This is provided mainly for sorting purposes.
-     */
-    lastSeen?: number;
-    /**
      * Percentage availability (as a decimal).
      * This reflects device uptime over the last 24 hours [that it was online].
      */
     availability?: number;
+    metrics: Metrics;
+    online?: boolean;
 };
-export declare type SessionsParams = {
+export type SessionsParams = {
     page?: number;
     limit?: number;
     sort?: string[];
@@ -73,7 +87,7 @@ export declare const isOpen: (session: Session) => boolean;
  * const nodeSession = await session('https://index.xe.network', 'xe_a1b2c3...')
  * ```
  */
-export declare const session: (host: string, address: string, cb?: RequestCallback | undefined) => Promise<Session>;
+export declare const session: (host: string, address: string, cb?: RequestCallback) => Promise<Session>;
 /**
  * Get sessions.
  *
@@ -83,6 +97,6 @@ export declare const session: (host: string, address: string, cb?: RequestCallba
  * const nodeSessions = await sessions('https://index.xe.network')
  * ```
  */
-export declare const sessions: (host: string, wallet?: string | undefined, params?: SessionsParams | undefined, cb?: RequestCallback | undefined) => Promise<ListResponse<Session, {
+export declare const sessions: (host: string, wallet?: string, params?: SessionsParams, cb?: RequestCallback) => Promise<ListResponse<Session, {
     wallet?: string | undefined;
 }>>;
