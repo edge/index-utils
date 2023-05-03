@@ -18,6 +18,25 @@ export type Geolocation = {
 }
 
 /**
+ * Host usage metrics.
+ */
+export type Metrics = {
+  messages: number
+  cdn: {
+    requests: number
+    data: {
+      in: number
+      out: number
+    }
+    timing: {
+      download: number
+      processing: number
+      total: number
+    }
+  }
+}
+
+/**
  * Information about a node.
  */
 export type Node = {
@@ -51,16 +70,12 @@ export type Session = {
   lastActive?: number
   end?: number
   /**
-   * When the device was last seen online.
-   * This matches `lastActive` or `end` depending on whether the session is open or closed.
-   * This is provided mainly for sorting purposes.
-   */
-  lastSeen?: number
-  /**
    * Percentage availability (as a decimal).
    * This reflects device uptime over the last 24 hours [that it was online].
    */
   availability?: number
+  metrics: Metrics
+  online?: boolean
 }
 
 export type SessionsParams = {
