@@ -299,6 +299,32 @@ require('@edge/index-utils').tx.transaction('https://index.xe.network', '46e5631
   })
 ```
 
+### Wallets
+
+Use the `wallet` component to query wallets.
+
+#### Get wallets
+
+`wallet.wallets()` gets a list of wallets.
+
+```js
+require('@edge/index-utils').wallet.wallets('https://index.xe.network')
+  .then(wallets => {
+    console.log(wallets)
+  })
+```
+
+#### Get wallet by address
+
+`wallet.wallet()` gets a wallet by its address.
+
+```js
+require('@edge/index-utils').wallet.wallet('https://index.xe.network', 'xe_ed9e05C9c85Ec8c46c333111a1C19035b5ECba99')
+  .then(wallet => {
+    console.log(wallet)
+  })
+```
+
 ### Request callbacks
 
 All API wrapper functions accept a `RequestCallback` as their final argument. This can be used to control request behaviour from your own code using [SuperAgent's chaining API](https://visionmedia.github.io/superagent/).
