@@ -33,6 +33,9 @@ Utility library for XE index API
     - [Transactions](#transactions)
       - [Get transactions](#get-transactions)
       - [Get transaction by hash](#get-transaction-by-hash)
+    - [Wallets](#wallets)
+      - [Get wallets](#get-wallets)
+      - [Get wallet by address](#get-wallet-by-address)
   - [Contributing](#contributing)
   - [License](#license)
 
