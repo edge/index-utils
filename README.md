@@ -17,6 +17,8 @@ Utility library for XE index API
       - [Get burn stats](#get-burn-stats)
     - [Exchange rate](#exchange-rate)
       - [Get current exchange rate](#get-current-exchange-rate)
+    - [Gas rate](#gas-rate)
+      - [Get current gas rate](#get-current-gas-rate)
     - [Sessions](#sessions)
       - [Get sessions](#get-sessions)
       - [Get session by device address](#get-session-by-device-address)
@@ -119,6 +121,21 @@ Use the `exchangeRate` component to query exchange rate data.
 require('@edge/index-utils').exchangeRate.current('https://index.xe.network')
   .then(xr => {
     console.log(xr)
+  })
+```
+
+### Gas rate
+
+Use the `gasRate` component to query gas rate data.
+
+#### Get current gas rate
+
+`gasRate.current()` gets the current gas rate data.
+
+```js
+require('@edge/index-utils').gasRate.current('https://index.xe.network')
+  .then(gr => {
+    console.log(gr)
   })
 ```
 
