@@ -37,29 +37,30 @@ This library provides a collection of simple functions for querying the XE block
 > - Mainnet: <https://index.xe.network>
 > - Testnet: <https://index.test.network>
 
+Code examples are included below for your guidance.
+
 ### Transactions
 
 Use the `tx` component to query transactions.
 
 #### Get transactions
 
-`tx.transactions()` gets a list of transactions, which can be filtered by wallet address, or a specific block, and certain other parameters.
+`tx.transactions()` gets a list of transactions, which can be filtered by wallet address.
 
 ```js
-const { tx } = require('@edge/index-utils')
+require('@edge/index-utils').tx.transactions('https://index.xe.network')
+  .then(txs => {
+    console.log(txs)
+  })
+```
 
-async function main() {
-  let txs = await tx.transactions('https://index.xe.network')
-  console.log(JSON.stringify(txs))
+Filter by wallet address:
 
-  txs = await tx.transactions('https://index.xe.network', 'xe_ed9e05C9c85Ec8c46c333111a1C19035b5ECba99')
-  console.log(JSON.stringify(txs))
-
-  txs = await tx.transactions('https://index.xe.network', undefined, { page: 2, limit: 5 })
-  console.log(JSON.stringify(txs))
-}
-
-main()
+```js
+require('@edge/index-utils').tx.transactions('https://index.xe.network', 'xe_ed9e05C9c85Ec8c46c333111a1C19035b5ECba99')
+  .then(txs => {
+    console.log(txs)
+  })
 ```
 
 #### Get transaction by hash
@@ -67,14 +68,10 @@ main()
 `tx.transaction()` retrieves a single transaction by its hash.
 
 ```js
-const { tx } = require('@edge/index-utils')
-
-async function main() {
-  const myTx = await tx.transaction('https://index.xe.network', '46e5631c4d711e9c3a56d8672446ba2b569efbcbff0a82ad579fe5f8660e8954')
-  console.log(JSON.stringify(myTx))
-}
-
-main()
+require('@edge/index-utils').tx.transaction('https://index.xe.network', '46e5631c4d711e9c3a56d8672446ba2b569efbcbff0a82ad579fe5f8660e8954')
+  .then(tx => {
+    console.log(tx)
+  })
 ```
 
 ### Burns
@@ -83,20 +80,13 @@ Use the `burn` component to query burns.
 
 #### Get burns
 
-`burn.burns()` gets a list of burns, which can be filtered by page.
+`burn.burns()` gets a list of burns.
 
 ```js
-const { burn } = require('@edge/index-utils')
-
-async function main() {
-  let burns = await burn.burns('https://index.xe.network')
-  console.log(JSON.stringify(burns))
-
-  burns = await burn.burns('https://index.xe.network', { page: 2, limit: 5 })
-  console.log(JSON.stringify(burns))
-}
-
-main()
+require('@edge/index-utils').burn.burns('https://index.xe.network')
+  .then(burns => {
+    console.log(burns)
+  })
 ```
 
 #### Get burn by hash
@@ -104,14 +94,10 @@ main()
 `burn.burn()` retrieves a single burn by its hash.
 
 ```js
-const { burn } = require('@edge/index-utils')
-
-async function main() {
-  const myBurn = await burn.burn('https://index.xe.network', '46e5631c4d711e9c3a56d8672446ba2b569efbcbff0a82ad579fe5f8660e8954')
-  console.log(JSON.stringify(myBurn))
-}
-
-main()
+require('@edge/index-utils').burn.burn('https://index.xe.network', '46e5631c4d711e9c3a56d8672446ba2b569efbcbff0a82ad579fe5f8660e8954')
+  .then(burn => {
+    console.log(burn)
+  })
 ```
 
 #### Get burn stats
@@ -119,14 +105,10 @@ main()
 `burn.stats()` retrieves network stats for burns, including burn counts and burn amounts for all time and last 30 days.
 
 ```js
-const { burn } = require('@edge/index-utils')
-
-async function main() {
-  const burnStats = await burn.stats('https://index.xe.network')
-  console.log(JSON.stringify(burnStats))
-}
-
-main()
+require('@edge/index-utils').burn.stats('https://index.xe.network')
+  .then(stats => {
+    console.log(stats)
+  })
 ```
 
 ### Stakes
@@ -138,20 +120,19 @@ Use the `stake` component to query stakes and their history.
 `stake.stakes()` gets a list of stakes, which can be filtered by wallet address.
 
 ```js
-const { stake } = require('@edge/index-utils')
+require('@edge/index-utils').stake.stakes('https://index.xe.network')
+  .then(stakes => {
+    console.log(stakes)
+  })
+```
 
-async function main() {
-  let stakes = await stake.stakes('https://index.xe.network')
-  console.log(JSON.stringify(stakes))
+Filter by wallet address:
 
-  stakes = await stake.stakes('https://index.xe.network', 'xe_3F129e50310Ab4db5e3C7Eb79e177A40a8e9D319')
-  console.log(JSON.stringify(stakes))
-
-  stakes = await stake.stakes('https://index.xe.network', undefined, { skip: 10, limit: 5 })
-  console.log(JSON.stringify(stakes))
-}
-
-main()
+```js
+require('@edge/index-utils').stake.stakes('https://index.xe.network', 'xe_3F129e50310Ab4db5e3C7Eb79e177A40a8e9D319')
+  .then(stakes => {
+    console.log(stakes)
+  })
 ```
 
 #### Get stake by ID
@@ -159,14 +140,10 @@ main()
 `stake.stake()` gets a single stake by ID.
 
 ```js
-const { stake } = require('@edge/index-utils')
-
-async function main() {
-  const myStake = await stake.stake('https://index.xe.network', 'de189ce46ca195a10346a884fb974b3104dcddfaeefd1e20c577e6b19b54bf09')
-  console.log(JSON.stringify(myStake))
-}
-
-main()
+require('@edge/index-utils').stake.stake('https://index.xe.network', 'de189ce46ca195a10346a884fb974b3104dcddfaeefd1e20c577e6b19b54bf09')
+  .then(stake => {
+    console.log(stake)
+  })
 ```
 
 > Be aware that a stake's ID is different than its hash. A stake's hash changes every time it is modified by an action. However, its ID always stays the same. You will normally use hash when querying the blockchain, and ID when querying the index.
@@ -176,14 +153,10 @@ main()
 `stake.history()` gets the history for a single stake. This provides insight into changes to a stake.
 
 ```js
-const { stake } = require('@edge/index-utils')
-
-async function main() {
-  const hist = await stake.history('https://index.xe.network', 'de189ce46ca195a10346a884fb974b3104dcddfaeefd1e20c577e6b19b54bf09')
-  console.log(JSON.stringify(hist))
-}
-
-main()
+require('@edge/index-utils').stake.history('https://index.xe.network', 'de189ce46ca195a10346a884fb974b3104dcddfaeefd1e20c577e6b19b54bf09')
+  .then(history => {
+    console.log(history)
+  })
 ```
 
 ### Sessions
@@ -195,17 +168,19 @@ Use the `session` component to query devices on the network.
 `session.sessions()` gets the latest session for each device on the network, which can be filtered by wallet address.
 
 ```js
-const { session } = require('@edge/index-utils')
+require('@edge/index-utils').session.sessions('https://index.xe.network')
+  .then(sessions => {
+    console.log(sessions)
+  })
+```
 
-async function main() {
-  const sessions = await session.sessions('https://index.xe.network')
-  console.log(JSON.stringify(sessions))
+Filter by wallet address:
 
-  const sessions = await session.sessions('https://index.xe.network', 'xe_3F129e50310Ab4db5e3C7Eb79e177A40a8e9D319')
-  console.log(JSON.stringify(sessions))
-}
-
-main()
+```js
+require('@edge/index-utils').session.sessions('https://index.xe.network', 'xe_3F129e50310Ab4db5e3C7Eb79e177A40a8e9D319')
+  .then(sessions => {
+    console.log(sessions)
+  })
 ```
 
 #### Get session by device address
@@ -215,14 +190,10 @@ main()
 > This is not a working example; a valid XE address is required.
 
 ```js
-const { session } = require('@edge/index-utils')
-
-async function main() {
-  const sess = await session.session('https://index.xe.network', 'xe_a1b2c3...')
-  console.log(JSON.stringify(sess))
-}
-
-main()
+require('@edge/index-utils').session.session('https://index.xe.network', 'xe_a1b2c3...')
+  .then(session => {
+    console.log(session)
+  })
 ```
 
 ### Exchange Rate
@@ -234,14 +205,10 @@ Use the `exchangeRate` component to query exchange rate data.
 `exchangeRate.current()` gets the current exchange rate data.
 
 ```js
-const { exchangeRate } = require('@edge/index-utils')
-
-async function main() {
-  const xr = await exchangeRate.current('https://index.xe.network')
-  console.log(JSON.stringify(xr))
-}
-
-main()
+require('@edge/index-utils').exchangeRate.current('https://index.xe.network')
+  .then(xr => {
+    console.log(xr)
+  })
 ```
 
 ### Token
@@ -253,14 +220,10 @@ Use the `token` component to query token data.
 `token.current()` gets the current token value.
 
 ```js
-const { token } = require('@edge/index-utils')
-
-async function main() {
-  const tv = await token.current('https://index.xe.network')
-  console.log(JSON.stringify(tv))
-}
-
-main()
+require('@edge/index-utils').token.current('https://index.xe.network')
+  .then(tv => {
+    console.log(tv)
+  })
 ```
 
 ### Request callbacks
