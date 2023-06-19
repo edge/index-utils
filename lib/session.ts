@@ -96,10 +96,6 @@ export const isOpen = (session: Session): boolean => session.end === undefined
 
 /**
  * Get a device's current or most recent session.
- *
- * ```
- * const nodeSession = await session('https://index.xe.network', 'xe_a1b2c3...')
- * ```
  */
 export const session = async (host: string, address: string, cb?: RequestCallback): Promise<Session> => {
   const url = `${host}/session/${address}`
@@ -111,10 +107,6 @@ export const session = async (host: string, address: string, cb?: RequestCallbac
  * Get sessions.
  *
  * This retrieves the current or most recent session for each device.
- *
- * ```
- * const nodeSessions = await sessions('https://index.xe.network')
- * ```
  */
 export const sessions = async (
   host: string,

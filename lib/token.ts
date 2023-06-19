@@ -19,10 +19,6 @@ export type Value = {
 
 /**
  * Get current token value data.
- *
- * ```
- * const rate = await current('https://index.xe.network')
- * ```
  */
 export const current = async (host: string, cb?: RequestCallback): Promise<Value> => {
   const url = `${host}/token/current`

@@ -14,13 +14,6 @@ export type AddressedStake = Stake & {
 export type SingleStake = Stake & {
   /** Wallet address for stake holder */
   wallet: string
-  /**
-   * Index only provides the latest stake data, reflecting its last change.
-   * However, you can still retrieve a stake using an outdated hash, in which event this flag will be `true` to
-   * signify that the hash in your request is not directly represented in the provided stake data.
-   * If you need it, you can get the original stake data as of that hash directly from the XE blockchain.
-   */
-  outdatedHash?: true
 }
 
 export type Stake = {
@@ -54,10 +47,6 @@ export type StakeType = 'gateway' | 'host' | 'stargate'
 
 /**
  * Get a list of transactions reflecting the history of actions for a stake.
- *
- * ```
- * const h = await history('https://index.xe.network', 'some-stake-id')
- * ```
  */
 export const history = async (
   host: string,
@@ -76,10 +65,6 @@ export const history = async (
  *
  * Some extra metadata is attached to stakes retrieved directly through this method.
  * See the `SingleStake` type for more information.
- *
- * ```
- * const s = await stake('https://index.xe.network', 'some-stake-id')
- * ```
  */
 export const stake = async (host: string, ref: string, cb?: RequestCallback): Promise<SingleStake> => {
   const url = `${host}/stake/${ref}`
@@ -91,14 +76,6 @@ export const stake = async (host: string, ref: string, cb?: RequestCallback): Pr
  * Get stakes.
  *
  * Provide an XE address to filter stakes by a single wallet.
- *
- * ```
- * const allStakes = await stakes('https://index.xe.network')
- *
- * const myStakes = await stakes('https://index.xe.network', 'my-wallet-address')
- *
- * const pagedStakes = await index.transactions('https://index.xe.network', undefined, { skip: 10, limit: 5 })
- * ```
  */
 export const stakes = async (
   host: string,

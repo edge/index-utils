@@ -23,10 +23,6 @@ export type ExchangeRate = {
 
 /**
  * Get current exchange rate data.
- *
- * ```
- * const rate = await current('https://index.xe.network')
- * ```
  */
 export const current = async (host: string, cb?: RequestCallback): Promise<ExchangeRate> => {
   const url = `${host}/exchangerate`

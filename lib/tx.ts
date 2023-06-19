@@ -78,10 +78,6 @@ export type TxsParams = {
 
 /**
  * Get a transaction.
- *
- * ```
- * const tx = await transaction('https://index.xe.network', 'some-tx-hash')
- * ```
  */
 export const transaction = async (host: string, hash: string, cb?: RequestCallback): Promise<Tx> => {
   const url = `${host}/transaction/${hash}`
@@ -93,14 +89,6 @@ export const transaction = async (host: string, hash: string, cb?: RequestCallba
  * Get transactions.
  *
  * Pass a wallet address to get only transactions to/from that address.
- *
- * ```
- * const allTxs = await transactions('https://index.xe.network')
- *
- * const myTxs = await transactions('https://index.xe.network', 'my-wallet-address')
- *
- * const pagedTxs = await index.transactions('https://index.xe.network', undefined, { page: 2, limit: 5 })
- * ```
  */
 export const transactions = async (
   host: string,

@@ -45,10 +45,6 @@ export type BurnsParams = {
 
 /**
  * Get a burn.
- *
- * ```
- * const burn = await burn('https://index.xe.network', 'some-burn-hash')
- * ```
  */
 export const burn = async (host: string, hash: string, cb?: RequestCallback): Promise<Burn> => {
   const url = `${host}/v2/burns/${hash}`
@@ -58,12 +54,6 @@ export const burn = async (host: string, hash: string, cb?: RequestCallback): Pr
 
 /**
  * Get burns.
- *
- * ```
- * const allTxs = await burns('https://index.xe.network')
- *
- * const pagedTxs = await index.burns('https://index.xe.network', undefined, { page: 2, limit: 5 })
- * ```
  */
 export const burns = async (
   host: string,
@@ -78,10 +68,6 @@ export const burns = async (
 
 /**
  * Get burns stats.
- *
- * ```
- * const burnStats = await stats('https://index.xe.network')
- * ```
  */
 export const stats = async (
   host: string,
