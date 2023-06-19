@@ -36,8 +36,6 @@ This library provides a collection of simple functions for querying the XE block
 >
 > - Mainnet: <https://index.xe.network>
 > - Testnet: <https://index.test.network>
->
-> All code examples use the mainnet URL for simplicity.
 
 ### Transactions
 
