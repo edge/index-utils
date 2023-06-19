@@ -11,6 +11,12 @@ export type AddressedStake = Stake & {
   tx: Omit<Tx, 'confirmations'>
 }
 
+export type DeviceStakeInfo = {
+  address: string
+  stake: string
+  type: StakeType
+}
+
 export type SingleStake = Stake & {
   /** Wallet address for stake holder */
   wallet: string
@@ -43,7 +49,16 @@ export type StakesParams = {
   hideReleased?: boolean
 }
 
-export type StakeType = 'gateway' | 'host' | 'stargate'
+export type StakeType = 'gateway' | 'governance' | 'host' | 'stargate'
+
+/**
+ * Get information about a stake for a device (node) address.
+ */
+export const deviceStake = async (host: string, address: string, cb: RequestCallback): Promise<DeviceStakeInfo> => {
+  const url = `${host}/device/${address}/stake`
+  const response = cb === undefined ? await superagent.get(url) : await cb(superagent.get(url))
+  return response.body
+}
 
 /**
  * Get a list of transactions reflecting the history of actions for a stake.

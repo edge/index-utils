@@ -23,6 +23,7 @@ Utility library for XE index API
     - [Stakes](#stakes)
       - [Get stakes](#get-stakes)
       - [Get stake by ID](#get-stake-by-id)
+      - [Get stake by device address](#get-stake-by-device-address)
       - [Get stake history](#get-stake-history)
     - [Token](#token)
       - [Get current token value](#get-current-token-value)
@@ -194,6 +195,19 @@ require('@edge/index-utils').stake.stake('https://index.xe.network', 'de189ce46c
 ```
 
 > Be aware that a stake's ID is different than its hash. A stake's hash changes every time it is modified by an action. However, its ID always stays the same. You will normally use hash when querying the blockchain, and ID when querying the index.
+
+#### Get stake by device address
+
+`stake.deviceStake()` gets information about the stake for a given device address.
+
+> This is not a working example; a valid XE address is required.
+
+```js
+require('@edge/index-utils').stake.deviceStake('https://index.xe.network', 'xe_a1b2c3...')
+  .then(info => {
+    console.log(info)
+  })
+```
 
 #### Get stake history
 
