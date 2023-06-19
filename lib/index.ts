@@ -5,6 +5,7 @@
 export * as block from './block'
 export * as burn from './burn'
 export * as exchangeRate from './exchangeRate'
+export * as gasRate from './gasRate'
 export * as session from './session'
 export * as stake from './stake'
 export * as token from './token'
