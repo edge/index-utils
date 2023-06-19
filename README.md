@@ -8,6 +8,9 @@ Utility library for XE index API
 
 - [index-utils](#index-utils)
   - [Usage](#usage)
+    - [Blocks](#blocks)
+      - [Get blocks](#get-blocks)
+      - [Get block](#get-block-by-hash-or-height)
     - [Burns](#burns)
       - [Get burns](#get-burns)
       - [Get burn by hash](#get-burn-by-hash)
@@ -38,7 +41,33 @@ This library provides a collection of simple functions for querying the XE block
 > - Mainnet: <https://index.xe.network>
 > - Testnet: <https://index.test.network>
 
-Code examples are included below for your guidance.
+Code examples are included below for your guidance. Mind that these examples are not comprehensive and many support additional parameters.
+
+### Blocks
+
+Use the `block` component to query blocks.
+
+#### Get blocks
+
+`block.blocks()` gets a list of blocks.
+
+```js
+require('@edge/index-utils').block.blocks('https://index.xe.network')
+  .then(blocks => {
+    console.log(blocks)
+  })
+```
+
+#### Get block by hash or height
+
+`block.block()` gets a block by its hash or height.
+
+```js
+require('@edge/index-utils').block.block('https://index.xe.network', 0)
+  .then(block => {
+    console.log(block)
+  })
+```
 
 ### Burns
 
