@@ -7,10 +7,9 @@ import { toQueryString } from './helpers'
 import { ListResponse, RequestCallback } from '.'
 
 /**
- * Index transaction.
- * A superset of the on-chain XE transaction.
+ * On-chain XE transaction.
  */
-export type Tx = {
+export type BaseTx = {
   timestamp: number
   sender: string
   recipient: string
@@ -19,6 +18,13 @@ export type Tx = {
   nonce: number
   signature: string
   hash: string
+}
+
+/**
+ * Index transaction.
+ * A superset of the on-chain XE transaction.
+ */
+export type Tx = BaseTx & {
   block: {
     height: number
     hash: string
