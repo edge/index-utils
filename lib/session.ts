@@ -18,12 +18,14 @@ export type Geolocation = {
   lng?: number
 }
 
+/** Condensed session geolocation data for mapping. */
 export type MapSession = {
   lat: number
   lng: number
   type: StakeType
 }
 
+/** Parameters for searching geolocations. */
 export type MapSessionsParams = {
   limit?: number
   page?: number
@@ -90,10 +92,11 @@ export type Session = {
   online?: boolean
 }
 
+/** Parameters for searching sessions. */
 export type SessionsParams = {
   page?: number
   limit?: number
-  sort?: string[]
+  sort?: string[] | string
 }
 
 /**

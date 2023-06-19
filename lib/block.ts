@@ -27,17 +27,19 @@ export type Block = {
   txCount: number
 }
 
+/** Reference to a block. */
 export type BlockRef = {
   height: number
   hash: string
 }
 
+/** Parameters for searching blocks. */
 export type BlocksParams = {
   noEmpty?: 1 | 0
   limit?: number
   page?: number
-  sort?: string
   since?: number
+  sort?: string[] | string
 }
 
 /**

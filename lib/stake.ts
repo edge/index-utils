@@ -11,6 +11,7 @@ export type AddressedStake = Stake & {
   tx: Omit<Tx, 'confirmations'>
 }
 
+/** Information about the stake to which a device is assigned. */
 export type DeviceStakeInfo = {
   address: string
   stake: string
@@ -22,6 +23,9 @@ export type SingleStake = Stake & {
   wallet: string
 }
 
+/**
+ * XE stake.
+ */
 export type Stake = {
   amount: number
   created: number
@@ -43,10 +47,12 @@ export type Stake = {
   }
 }
 
+/** Parameters for searching stakes. */
 export type StakesParams = {
   limit?: number
   page?: number
   hideReleased?: boolean
+  sort?: string[] | string
 }
 
 export type StakeType = 'gateway' | 'governance' | 'host' | 'stargate'

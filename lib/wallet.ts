@@ -26,11 +26,12 @@ export type Wallet = {
   trusted?: boolean
 }
 
+/** Parameters for searching wallets. */
 export type WalletsParams = {
   address?: string
   limit?: number
   page?: number
-  sort?: string
+  sort?: string[] | string
 }
 
 /**

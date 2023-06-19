@@ -32,6 +32,7 @@ export type Tx = BaseTx & {
   confirmations: number
 }
 
+/** Reference to a transaction. */
 export type TxRef = {
   hash: string
   timestamp: number
@@ -79,12 +80,14 @@ export type TxVarData = {
   value?: unknown
 }
 
+/** Parameters for searching transactions. */
 export type TxsParams = {
   above?: number
   since?: number
   page?: number
   limit?: number
   type?: string
+  sort?: string[] | string
 }
 
 /**

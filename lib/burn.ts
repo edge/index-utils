@@ -23,9 +23,7 @@ export type Burn = {
   }
 }
 
-/**
- * Burn stats
- */
+/** Burn stats. */
 export type BurnStats = {
   '30d': {
     amount: number
@@ -37,6 +35,7 @@ export type BurnStats = {
   }
 }
 
+/** Parameters for searching burns. */
 export type BurnsParams = {
   page?: number
   limit?: number
