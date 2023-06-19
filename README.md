@@ -8,24 +8,25 @@ Utility library for XE index API
 
 - [index-utils](#index-utils)
   - [Usage](#usage)
-    - [Transactions](#transactions)
-      - [Get transactions](#get-transactions)
-      - [Get transaction by hash](#get-transaction-by-hash)
     - [Burns](#burns)
       - [Get burns](#get-burns)
       - [Get burn by hash](#get-burn-by-hash)
       - [Get burn stats](#get-burn-stats)
+    - [Exchange rate](#exchange-rate)
+      - [Get current exchange rate](#get-current-exchange-rate)
+    - [Sessions](#sessions)
+      - [Get sessions](#get-sessions)
+      - [Get session by device address](#get-session-by-device-address)
     - [Stakes](#stakes)
       - [Get stakes](#get-stakes)
       - [Get stake by ID](#get-stake-by-id)
       - [Get stake history](#get-stake-history)
-    - [Sessions](#sessions)
-      - [Get sessions](#get-sessions)
-      - [Get session by device address](#get-session-by-device-address)
-    - [Exchange Rate](#exchange-rate)
-      - [Get current exchange rate](#get-current-exchange-rate)
     - [Token](#token)
       - [Get current token value](#get-current-token-value)
+    - [Transactions](#transactions)
+      - [Get transactions](#get-transactions)
+      - [Get transaction by hash](#get-transaction-by-hash)
+  - [Contributing](#contributing)
   - [License](#license)
 
 ## Usage
@@ -38,41 +39,6 @@ This library provides a collection of simple functions for querying the XE block
 > - Testnet: <https://index.test.network>
 
 Code examples are included below for your guidance.
-
-### Transactions
-
-Use the `tx` component to query transactions.
-
-#### Get transactions
-
-`tx.transactions()` gets a list of transactions, which can be filtered by wallet address.
-
-```js
-require('@edge/index-utils').tx.transactions('https://index.xe.network')
-  .then(txs => {
-    console.log(txs)
-  })
-```
-
-Filter by wallet address:
-
-```js
-require('@edge/index-utils').tx.transactions('https://index.xe.network', 'xe_ed9e05C9c85Ec8c46c333111a1C19035b5ECba99')
-  .then(txs => {
-    console.log(txs)
-  })
-```
-
-#### Get transaction by hash
-
-`tx.transaction()` retrieves a single transaction by its hash.
-
-```js
-require('@edge/index-utils').tx.transaction('https://index.xe.network', '46e5631c4d711e9c3a56d8672446ba2b569efbcbff0a82ad579fe5f8660e8954')
-  .then(tx => {
-    console.log(tx)
-  })
-```
 
 ### Burns
 
@@ -108,6 +74,58 @@ require('@edge/index-utils').burn.burn('https://index.xe.network', '46e5631c4d71
 require('@edge/index-utils').burn.stats('https://index.xe.network')
   .then(stats => {
     console.log(stats)
+  })
+```
+
+### Exchange rate
+
+Use the `exchangeRate` component to query exchange rate data.
+
+#### Get current exchange rate
+
+`exchangeRate.current()` gets the current exchange rate data.
+
+```js
+require('@edge/index-utils').exchangeRate.current('https://index.xe.network')
+  .then(xr => {
+    console.log(xr)
+  })
+```
+
+### Sessions
+
+Use the `session` component to query devices on the network.
+
+#### Get sessions
+
+`session.sessions()` gets the latest session for each device on the network, which can be filtered by wallet address.
+
+```js
+require('@edge/index-utils').session.sessions('https://index.xe.network')
+  .then(sessions => {
+    console.log(sessions)
+  })
+```
+
+Filter by wallet address:
+
+```js
+require('@edge/index-utils').session.sessions('https://index.xe.network', 'xe_3F129e50310Ab4db5e3C7Eb79e177A40a8e9D319')
+  .then(sessions => {
+    console.log(sessions)
+  })
+```
+
+#### Get session by device address
+
+`session.session()` gets the current or most recent session for a given device address.
+
+> This is not a working example; a valid XE address is required.
+
+```js
+require('@edge/index-utils').session.session('https://index.xe.network', 'xe_a1b2c3...')
+  .then(session => {
+    console.log(session)
   })
 ```
 
@@ -159,58 +177,6 @@ require('@edge/index-utils').stake.history('https://index.xe.network', 'de189ce4
   })
 ```
 
-### Sessions
-
-Use the `session` component to query devices on the network.
-
-#### Get sessions
-
-`session.sessions()` gets the latest session for each device on the network, which can be filtered by wallet address.
-
-```js
-require('@edge/index-utils').session.sessions('https://index.xe.network')
-  .then(sessions => {
-    console.log(sessions)
-  })
-```
-
-Filter by wallet address:
-
-```js
-require('@edge/index-utils').session.sessions('https://index.xe.network', 'xe_3F129e50310Ab4db5e3C7Eb79e177A40a8e9D319')
-  .then(sessions => {
-    console.log(sessions)
-  })
-```
-
-#### Get session by device address
-
-`session.session()` gets the current or most recent session for a given device address.
-
-> This is not a working example; a valid XE address is required.
-
-```js
-require('@edge/index-utils').session.session('https://index.xe.network', 'xe_a1b2c3...')
-  .then(session => {
-    console.log(session)
-  })
-```
-
-### Exchange Rate
-
-Use the `exchangeRate` component to query exchange rate data.
-
-#### Get current exchange rate
-
-`exchangeRate.current()` gets the current exchange rate data.
-
-```js
-require('@edge/index-utils').exchangeRate.current('https://index.xe.network')
-  .then(xr => {
-    console.log(xr)
-  })
-```
-
 ### Token
 
 Use the `token` component to query token data.
@@ -223,6 +189,41 @@ Use the `token` component to query token data.
 require('@edge/index-utils').token.current('https://index.xe.network')
   .then(tv => {
     console.log(tv)
+  })
+```
+
+### Transactions
+
+Use the `tx` component to query transactions.
+
+#### Get transactions
+
+`tx.transactions()` gets a list of transactions, which can be filtered by wallet address.
+
+```js
+require('@edge/index-utils').tx.transactions('https://index.xe.network')
+  .then(txs => {
+    console.log(txs)
+  })
+```
+
+Filter by wallet address:
+
+```js
+require('@edge/index-utils').tx.transactions('https://index.xe.network', 'xe_ed9e05C9c85Ec8c46c333111a1C19035b5ECba99')
+  .then(txs => {
+    console.log(txs)
+  })
+```
+
+#### Get transaction by hash
+
+`tx.transaction()` retrieves a single transaction by its hash.
+
+```js
+require('@edge/index-utils').tx.transaction('https://index.xe.network', '46e5631c4d711e9c3a56d8672446ba2b569efbcbff0a82ad579fe5f8660e8954')
+  .then(tx => {
+    console.log(tx)
   })
 ```
 
