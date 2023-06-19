@@ -21,7 +21,7 @@ Utility library for XE index API
   - [Sessions](#sessions)
     - [Get sessions](#get-sessions)
     - [Get session by device address](#get-session-by-device-address)
-    - [Get session geolocations]()
+    - [Get session geolocations](#get-session-geolocations)
   - [Stakes](#stakes)
     - [Get stakes](#get-stakes)
     - [Get stake by ID](#get-stake-by-id)
