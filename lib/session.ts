@@ -2,6 +2,7 @@
 // Use of this source code is governed by a GNU GPL-style license
 // that can be found in the LICENSE.md file. All rights reserved.
 
+import { StakeType } from './stake'
 import superagent from 'superagent'
 import { toQueryString } from './helpers'
 import { ListResponse, RequestCallback } from '.'
@@ -15,6 +16,17 @@ export type Geolocation = {
   countryCode?: string
   lat?: number
   lng?: number
+}
+
+export type MapSession = {
+  lat: number
+  lng: number
+  type: StakeType
+}
+
+export type MapSessionsParams = {
+  limit?: number
+  page?: number
 }
 
 /**
@@ -93,6 +105,16 @@ export const isClosed = (session: Session): boolean => !isOpen(session)
  * Determine whether a session is open.
  */
 export const isOpen = (session: Session): boolean => session.end === undefined
+
+/**
+ * Get sessions as an anonymised geolocation list, suitable for mapping.
+ */
+export const map = async (host: string, params?: MapSessionsParams, cb?: RequestCallback): Promise<MapSession> => {
+  let url = `${host}/mapsessions`
+  if (params !== undefined) url += `?${toQueryString(params)}`
+  const response = cb === undefined ? await superagent.get(url) : await cb(superagent.get(url))
+  return response.body
+}
 
 /**
  * Get a device's current or most recent session.

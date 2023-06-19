@@ -22,6 +22,7 @@ Utility library for XE index API
     - [Sessions](#sessions)
       - [Get sessions](#get-sessions)
       - [Get session by device address](#get-session-by-device-address)
+      - [Get session geolocations]()
     - [Stakes](#stakes)
       - [Get stakes](#get-stakes)
       - [Get stake by ID](#get-stake-by-id)
@@ -173,6 +174,17 @@ require('@edge/index-utils').session.sessions('https://index.xe.network', 'xe_3F
 require('@edge/index-utils').session.session('https://index.xe.network', 'xe_a1b2c3...')
   .then(session => {
     console.log(session)
+  })
+```
+
+#### Get session geolocations
+
+`session.map()` gets an anonymised geolocation list, suitable for mapping.
+
+```js
+require('@edge/index-utils').session.map('https://index.xe.network')
+  .then(locations => {
+    console.log(locations)
   })
 ```
 
