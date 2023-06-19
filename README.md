@@ -266,6 +266,22 @@ require('@edge/index-utils').token.current('https://index.xe.network')
   })
 ```
 
+#### Get daily token value
+
+There are two forms of this method:
+
+- `token.daily()` gets the token value for the last week at the end of each day (for the current date, the most recent value available)
+- `token.lastWeek()` gets the token value for the last week at approximately the current time each day
+
+Both return the same data structure.
+
+```js
+require('@edge/index-utils').token.daily('https://index.xe.network')
+  .then(tvs => {
+    console.log(tvs)
+  })
+```
+
 ### Transactions
 
 Use the `tx` component to query transactions.

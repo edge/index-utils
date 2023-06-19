@@ -25,3 +25,21 @@ export const current = async (host: string, cb?: RequestCallback): Promise<Value
   const response = cb === undefined ? await superagent.get(url) : await cb(superagent.get(url))
   return response.body
 }
+
+/**
+ * Get token value data for the last week, at the end of each day.
+ */
+export const daily = async (host: string, cb?: RequestCallback): Promise<Value[]> => {
+  const url = `${host}/token/daily`
+  const response = cb === undefined ? await superagent.get(url) : await cb(superagent.get(url))
+  return response.body
+}
+
+/**
+ * Get token value data for the last week, at (approximately) the current time of day.
+ */
+export const lastWeek = async (host: string, cb?: RequestCallback): Promise<Value[]> => {
+  const url = `${host}/token/lastweek`
+  const response = cb === undefined ? await superagent.get(url) : await cb(superagent.get(url))
+  return response.body
+}
