@@ -2,7 +2,7 @@ import { ListResponse, RequestCallback } from '.';
 /**
  * Index burn.
  */
-export declare type Burn = {
+export type Burn = {
     timestamp: number;
     sender: string;
     recipient: string;
@@ -15,10 +15,8 @@ export declare type Burn = {
         hash: string;
     };
 };
-/**
- * Burn stats
- */
-export declare type BurnStats = {
+/** Burn stats. */
+export type BurnStats = {
     '30d': {
         amount: number;
         count: number;
@@ -28,36 +26,23 @@ export declare type BurnStats = {
         count: number;
     };
 };
-export declare type BurnsParams = {
+/** Parameters for searching burns. */
+export type BurnsParams = {
     page?: number;
     limit?: number;
     type?: string;
 };
 /**
  * Get a burn.
- *
- * ```
- * const burn = await burn('https://index.xe.network', 'some-burn-hash')
- * ```
  */
-export declare const burn: (host: string, hash: string, cb?: RequestCallback | undefined) => Promise<Burn>;
+export declare const burn: (host: string, hash: string, cb?: RequestCallback) => Promise<Burn>;
 /**
  * Get burns.
- *
- * ```
- * const allTxs = await burns('https://index.xe.network')
- *
- * const pagedTxs = await index.burns('https://index.xe.network', undefined, { page: 2, limit: 5 })
- * ```
  */
-export declare const burns: (host: string, params?: BurnsParams | undefined, cb?: RequestCallback | undefined) => Promise<ListResponse<Burn, {
+export declare const burns: (host: string, params?: BurnsParams, cb?: RequestCallback) => Promise<ListResponse<Burn, {
     page: number;
 }>>;
 /**
  * Get burns stats.
- *
- * ```
- * const burnStats = await stats('https://index.xe.network')
- * ```
  */
-export declare const stats: (host: string, cb?: RequestCallback | undefined) => Promise<ListResponse<BurnStats>>;
+export declare const stats: (host: string, cb?: RequestCallback) => Promise<ListResponse<BurnStats>>;

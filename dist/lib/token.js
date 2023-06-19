@@ -17,7 +17,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     function verb(n) { return function (v) { return step([n, v]); }; }
     function step(op) {
         if (f) throw new TypeError("Generator is already executing.");
-        while (_) try {
+        while (g && (g = 0, op[0] && (_ = 0)), _) try {
             if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
             if (y = 0, t) op = [op[0] & 2, t.value];
             switch (op[0]) {
@@ -42,14 +42,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 exports.__esModule = true;
-exports.current = void 0;
+exports.lastWeek = exports.daily = exports.current = void 0;
 var superagent_1 = __importDefault(require("superagent"));
 /**
  * Get current token value data.
- *
- * ```
- * const rate = await current('https://index.xe.network')
- * ```
  */
 var current = function (host, cb) { return __awaiter(void 0, void 0, void 0, function () {
     var url, response, _a;
@@ -73,3 +69,53 @@ var current = function (host, cb) { return __awaiter(void 0, void 0, void 0, fun
     });
 }); };
 exports.current = current;
+/**
+ * Get token value data for the last week, at the end of each day.
+ */
+var daily = function (host, cb) { return __awaiter(void 0, void 0, void 0, function () {
+    var url, response, _a;
+    return __generator(this, function (_b) {
+        switch (_b.label) {
+            case 0:
+                url = "".concat(host, "/token/daily");
+                if (!(cb === undefined)) return [3 /*break*/, 2];
+                return [4 /*yield*/, superagent_1["default"].get(url)];
+            case 1:
+                _a = _b.sent();
+                return [3 /*break*/, 4];
+            case 2: return [4 /*yield*/, cb(superagent_1["default"].get(url))];
+            case 3:
+                _a = _b.sent();
+                _b.label = 4;
+            case 4:
+                response = _a;
+                return [2 /*return*/, response.body];
+        }
+    });
+}); };
+exports.daily = daily;
+/**
+ * Get token value data for the last week, at (approximately) the current time of day.
+ */
+var lastWeek = function (host, cb) { return __awaiter(void 0, void 0, void 0, function () {
+    var url, response, _a;
+    return __generator(this, function (_b) {
+        switch (_b.label) {
+            case 0:
+                url = "".concat(host, "/token/lastweek");
+                if (!(cb === undefined)) return [3 /*break*/, 2];
+                return [4 /*yield*/, superagent_1["default"].get(url)];
+            case 1:
+                _a = _b.sent();
+                return [3 /*break*/, 4];
+            case 2: return [4 /*yield*/, cb(superagent_1["default"].get(url))];
+            case 3:
+                _a = _b.sent();
+                _b.label = 4;
+            case 4:
+                response = _a;
+                return [2 /*return*/, response.body];
+        }
+    });
+}); };
+exports.lastWeek = lastWeek;

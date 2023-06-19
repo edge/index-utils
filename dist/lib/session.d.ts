@@ -1,3 +1,4 @@
+import { StakeType } from './stake';
 import { ListResponse, RequestCallback } from '.';
 /**
  * Geolocation data.
@@ -8,6 +9,17 @@ export type Geolocation = {
     countryCode?: string;
     lat?: number;
     lng?: number;
+};
+/** Condensed session geolocation data for mapping. */
+export type MapSession = {
+    lat: number;
+    lng: number;
+    type: StakeType;
+};
+/** Parameters for searching geolocations. */
+export type MapSessionsParams = {
+    limit?: number;
+    page?: number;
 };
 /**
  * Host usage metrics.
@@ -67,10 +79,11 @@ export type Session = {
     metrics: Metrics;
     online?: boolean;
 };
+/** Parameters for searching sessions. */
 export type SessionsParams = {
     page?: number;
     limit?: number;
-    sort?: string[];
+    sort?: string[] | string;
 };
 /**
  * Determine whether a session is closed.
@@ -81,21 +94,17 @@ export declare const isClosed: (session: Session) => boolean;
  */
 export declare const isOpen: (session: Session) => boolean;
 /**
+ * Get sessions as an anonymised geolocation list, suitable for mapping.
+ */
+export declare const map: (host: string, params?: MapSessionsParams, cb?: RequestCallback) => Promise<MapSession>;
+/**
  * Get a device's current or most recent session.
- *
- * ```
- * const nodeSession = await session('https://index.xe.network', 'xe_a1b2c3...')
- * ```
  */
 export declare const session: (host: string, address: string, cb?: RequestCallback) => Promise<Session>;
 /**
  * Get sessions.
  *
  * This retrieves the current or most recent session for each device.
- *
- * ```
- * const nodeSessions = await sessions('https://index.xe.network')
- * ```
  */
 export declare const sessions: (host: string, wallet?: string, params?: SessionsParams, cb?: RequestCallback) => Promise<ListResponse<Session, {
     wallet?: string | undefined;

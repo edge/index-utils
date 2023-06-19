@@ -1,5 +1,5 @@
 "use strict";
-// Copyright (C) 2021 Edge Network Technologies Limited
+// Copyright (C) 2023 Edge Network Technologies Limited
 // Use of this source code is governed by a GNU GPL-style license
 // that can be found in the LICENSE.md file. All rights reserved.
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
@@ -42,18 +42,17 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 exports.__esModule = true;
-exports.transactions = exports.transaction = void 0;
+exports.current = void 0;
 var superagent_1 = __importDefault(require("superagent"));
-var helpers_1 = require("./helpers");
 /**
- * Get a transaction.
+ * Get current gas rate data.
  */
-var transaction = function (host, hash, cb) { return __awaiter(void 0, void 0, void 0, function () {
+var current = function (host, cb) { return __awaiter(void 0, void 0, void 0, function () {
     var url, response, _a;
     return __generator(this, function (_b) {
         switch (_b.label) {
             case 0:
-                url = "".concat(host, "/transaction/").concat(hash);
+                url = "".concat(host, "/gasrates");
                 if (!(cb === undefined)) return [3 /*break*/, 2];
                 return [4 /*yield*/, superagent_1["default"].get(url)];
             case 1:
@@ -69,35 +68,4 @@ var transaction = function (host, hash, cb) { return __awaiter(void 0, void 0, v
         }
     });
 }); };
-exports.transaction = transaction;
-/**
- * Get transactions.
- *
- * Pass a wallet address to get only transactions to/from that address.
- */
-var transactions = function (host, address, params, cb) { return __awaiter(void 0, void 0, void 0, function () {
-    var url, response, _a;
-    return __generator(this, function (_b) {
-        switch (_b.label) {
-            case 0:
-                url = "".concat(host, "/transactions");
-                if (address !== undefined)
-                    url += "/".concat(address);
-                if (params !== undefined)
-                    url += "?".concat((0, helpers_1.toQueryString)(params));
-                if (!(cb === undefined)) return [3 /*break*/, 2];
-                return [4 /*yield*/, superagent_1["default"].get(url)];
-            case 1:
-                _a = _b.sent();
-                return [3 /*break*/, 4];
-            case 2: return [4 /*yield*/, cb(superagent_1["default"].get(url))];
-            case 3:
-                _a = _b.sent();
-                _b.label = 4;
-            case 4:
-                response = _a;
-                return [2 /*return*/, response.body];
-        }
-    });
-}); };
-exports.transactions = transactions;
+exports.current = current;

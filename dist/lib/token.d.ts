@@ -2,7 +2,7 @@ import { RequestCallback } from '.';
 /**
  * Token value data.
  */
-export declare type Value = {
+export type Value = {
     /** Date of value capture */
     date: string;
     /** Value of XE in ETH */
@@ -12,9 +12,13 @@ export declare type Value = {
 };
 /**
  * Get current token value data.
- *
- * ```
- * const rate = await current('https://index.xe.network')
- * ```
  */
-export declare const current: (host: string, cb?: RequestCallback | undefined) => Promise<Value>;
+export declare const current: (host: string, cb?: RequestCallback) => Promise<Value>;
+/**
+ * Get token value data for the last week, at the end of each day.
+ */
+export declare const daily: (host: string, cb?: RequestCallback) => Promise<Value[]>;
+/**
+ * Get token value data for the last week, at (approximately) the current time of day.
+ */
+export declare const lastWeek: (host: string, cb?: RequestCallback) => Promise<Value[]>;

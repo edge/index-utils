@@ -2,7 +2,7 @@ import { RequestCallback } from '.';
 /**
  * Exchange rate data.
  */
-export declare type ExchangeRate = {
+export type ExchangeRate = {
     /** Date of rate capture */
     date: string;
     /** Unique reference */
@@ -16,9 +16,5 @@ export declare type ExchangeRate = {
 };
 /**
  * Get current exchange rate data.
- *
- * ```
- * const rate = await current('https://index.xe.network')
- * ```
  */
-export declare const current: (host: string, cb?: RequestCallback | undefined) => Promise<ExchangeRate>;
+export declare const current: (host: string, cb?: RequestCallback) => Promise<ExchangeRate>;

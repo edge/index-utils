@@ -1,9 +1,8 @@
 import { ListResponse, RequestCallback } from '.';
 /**
- * Index transaction.
- * A superset of the on-chain XE transaction.
+ * On-chain XE transaction.
  */
-export declare type Tx = {
+export type BaseTx = {
     timestamp: number;
     sender: string;
     recipient: string;
@@ -12,17 +11,28 @@ export declare type Tx = {
     nonce: number;
     signature: string;
     hash: string;
+};
+/**
+ * Index transaction.
+ * A superset of the on-chain XE transaction.
+ */
+export type Tx = BaseTx & {
     block: {
         height: number;
         hash: string;
     };
     confirmations: number;
 };
+/** Reference to a transaction. */
+export type TxRef = {
+    hash: string;
+    timestamp: number;
+};
 /**
  * Bridge transaction data.
  * These values are set in exchange transactions created by Bridge.
  */
-export declare type TxBridgeData = {
+export type TxBridgeData = {
     /** Ethereum address for withdrawal/sale transaction. Used by Bridge. */
     destination?: string;
     /** Fee amount in an exchange transaction. Used by Bridge. */
@@ -35,7 +45,7 @@ export declare type TxBridgeData = {
 /**
  * Transaction data.
  */
-export declare type TxData = TxBridgeData & TxVarData & {
+export type TxData = TxBridgeData & TxVarData & {
     /** Blockchain action to be effected in the course of creating the transaction. */
     action?: string;
     /** Device ID. Used with `action: DeviceAction` */
@@ -51,40 +61,30 @@ export declare type TxData = TxBridgeData & TxVarData & {
  * Variables transaction data.
  * These values are set by a blockchain custodian when updating on-chain variables.
  */
-export declare type TxVarData = {
+export type TxVarData = {
     /** Variable name. Used with `action: VarAction` */
     key?: string;
     /** Variable value. Used with `action: "set_var"` */
     value?: unknown;
 };
-export declare type TxsParams = {
+/** Parameters for searching transactions. */
+export type TxsParams = {
     above?: number;
     since?: number;
     page?: number;
     limit?: number;
     type?: string;
+    sort?: string[] | string;
 };
 /**
  * Get a transaction.
- *
- * ```
- * const tx = await transaction('https://index.xe.network', 'some-tx-hash')
- * ```
  */
-export declare const transaction: (host: string, hash: string, cb?: RequestCallback | undefined) => Promise<Tx>;
+export declare const transaction: (host: string, hash: string, cb?: RequestCallback) => Promise<Tx>;
 /**
  * Get transactions.
  *
  * Pass a wallet address to get only transactions to/from that address.
- *
- * ```
- * const allTxs = await transactions('https://index.xe.network')
- *
- * const myTxs = await transactions('https://index.xe.network', 'my-wallet-address')
- *
- * const pagedTxs = await index.transactions('https://index.xe.network', undefined, { page: 2, limit: 5 })
- * ```
  */
-export declare const transactions: (host: string, address?: string | undefined, params?: TxsParams | undefined, cb?: RequestCallback | undefined) => Promise<ListResponse<Tx, {
+export declare const transactions: (host: string, address?: string, params?: TxsParams, cb?: RequestCallback) => Promise<ListResponse<Tx, {
     page: number;
 }>>;

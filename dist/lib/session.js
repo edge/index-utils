@@ -42,7 +42,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 exports.__esModule = true;
-exports.sessions = exports.session = exports.isOpen = exports.isClosed = void 0;
+exports.sessions = exports.session = exports.map = exports.isOpen = exports.isClosed = void 0;
 var superagent_1 = __importDefault(require("superagent"));
 var helpers_1 = require("./helpers");
 /**
@@ -56,11 +56,34 @@ exports.isClosed = isClosed;
 var isOpen = function (session) { return session.end === undefined; };
 exports.isOpen = isOpen;
 /**
+ * Get sessions as an anonymised geolocation list, suitable for mapping.
+ */
+var map = function (host, params, cb) { return __awaiter(void 0, void 0, void 0, function () {
+    var url, response, _a;
+    return __generator(this, function (_b) {
+        switch (_b.label) {
+            case 0:
+                url = "".concat(host, "/mapsessions");
+                if (params !== undefined)
+                    url += "?".concat((0, helpers_1.toQueryString)(params));
+                if (!(cb === undefined)) return [3 /*break*/, 2];
+                return [4 /*yield*/, superagent_1["default"].get(url)];
+            case 1:
+                _a = _b.sent();
+                return [3 /*break*/, 4];
+            case 2: return [4 /*yield*/, cb(superagent_1["default"].get(url))];
+            case 3:
+                _a = _b.sent();
+                _b.label = 4;
+            case 4:
+                response = _a;
+                return [2 /*return*/, response.body];
+        }
+    });
+}); };
+exports.map = map;
+/**
  * Get a device's current or most recent session.
- *
- * ```
- * const nodeSession = await session('https://index.xe.network', 'xe_a1b2c3...')
- * ```
  */
 var session = function (host, address, cb) { return __awaiter(void 0, void 0, void 0, function () {
     var url, response, _a;
@@ -88,10 +111,6 @@ exports.session = session;
  * Get sessions.
  *
  * This retrieves the current or most recent session for each device.
- *
- * ```
- * const nodeSessions = await sessions('https://index.xe.network')
- * ```
  */
 var sessions = function (host, wallet, params, cb) { return __awaiter(void 0, void 0, void 0, function () {
     var url, response, _a;

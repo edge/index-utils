@@ -1,5 +1,5 @@
 "use strict";
-// Copyright (C) 2021 Edge Network Technologies Limited
+// Copyright (C) 2023 Edge Network Technologies Limited
 // Use of this source code is governed by a GNU GPL-style license
 // that can be found in the LICENSE.md file. All rights reserved.
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
@@ -42,18 +42,18 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 exports.__esModule = true;
-exports.stakes = exports.stake = exports.history = exports.deviceStake = void 0;
+exports.wallets = exports.wallet = void 0;
 var superagent_1 = __importDefault(require("superagent"));
 var helpers_1 = require("./helpers");
 /**
- * Get information about a stake for a device (node) address.
+ * Get a wallet by address.
  */
-var deviceStake = function (host, address, cb) { return __awaiter(void 0, void 0, void 0, function () {
+var wallet = function (host, address, cb) { return __awaiter(void 0, void 0, void 0, function () {
     var url, response, _a;
     return __generator(this, function (_b) {
         switch (_b.label) {
             case 0:
-                url = "".concat(host, "/device/").concat(address, "/stake");
+                url = "".concat(host, "/wallet/").concat(address);
                 if (!(cb === undefined)) return [3 /*break*/, 2];
                 return [4 /*yield*/, superagent_1["default"].get(url)];
             case 1:
@@ -69,16 +69,16 @@ var deviceStake = function (host, address, cb) { return __awaiter(void 0, void 0
         }
     });
 }); };
-exports.deviceStake = deviceStake;
+exports.wallet = wallet;
 /**
- * Get a list of transactions reflecting the history of actions for a stake.
+ * Get wallets.
  */
-var history = function (host, id, params, cb) { return __awaiter(void 0, void 0, void 0, function () {
+var wallets = function (host, params, cb) { return __awaiter(void 0, void 0, void 0, function () {
     var url, response, _a;
     return __generator(this, function (_b) {
         switch (_b.label) {
             case 0:
-                url = "".concat(host, "/stake/").concat(id, "/history");
+                url = "".concat(host, "/wallets");
                 if (params !== undefined)
                     url += "?".concat((0, helpers_1.toQueryString)(params));
                 if (!(cb === undefined)) return [3 /*break*/, 2];
@@ -96,63 +96,4 @@ var history = function (host, id, params, cb) { return __awaiter(void 0, void 0,
         }
     });
 }); };
-exports.history = history;
-/**
- * Get a stake by ID or hash.
- *
- * Some extra metadata is attached to stakes retrieved directly through this method.
- * See the `SingleStake` type for more information.
- */
-var stake = function (host, ref, cb) { return __awaiter(void 0, void 0, void 0, function () {
-    var url, response, _a;
-    return __generator(this, function (_b) {
-        switch (_b.label) {
-            case 0:
-                url = "".concat(host, "/stake/").concat(ref);
-                if (!(cb === undefined)) return [3 /*break*/, 2];
-                return [4 /*yield*/, superagent_1["default"].get(url)];
-            case 1:
-                _a = _b.sent();
-                return [3 /*break*/, 4];
-            case 2: return [4 /*yield*/, cb(superagent_1["default"].get(url))];
-            case 3:
-                _a = _b.sent();
-                _b.label = 4;
-            case 4:
-                response = _a;
-                return [2 /*return*/, response.body];
-        }
-    });
-}); };
-exports.stake = stake;
-/**
- * Get stakes.
- *
- * Provide an XE address to filter stakes by a single wallet.
- */
-var stakes = function (host, address, params, cb) { return __awaiter(void 0, void 0, void 0, function () {
-    var url, response, _a;
-    return __generator(this, function (_b) {
-        switch (_b.label) {
-            case 0:
-                url = "".concat(host, "/stakes");
-                if (address !== undefined)
-                    url += "/".concat(address);
-                if (params !== undefined)
-                    url += "?".concat((0, helpers_1.toQueryString)(params));
-                if (!(cb === undefined)) return [3 /*break*/, 2];
-                return [4 /*yield*/, superagent_1["default"].get(url)];
-            case 1:
-                _a = _b.sent();
-                return [3 /*break*/, 4];
-            case 2: return [4 /*yield*/, cb(superagent_1["default"].get(url))];
-            case 3:
-                _a = _b.sent();
-                _b.label = 4;
-            case 4:
-                response = _a;
-                return [2 /*return*/, response.body];
-        }
-    });
-}); };
-exports.stakes = stakes;
+exports.wallets = wallets;
