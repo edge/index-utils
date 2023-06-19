@@ -15,7 +15,7 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "devDependencies": {
-    "@edge/eslint-config-typescript": "^0.1.1",
+    "@edge/eslint-config-typescript": "^0.1.5",
     "@types/superagent": "^4.1.13",
     "@typescript-eslint/eslint-plugin": "^4.33.0",
     "@typescript-eslint/parser": "^4.33.0",
