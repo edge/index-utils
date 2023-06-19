@@ -32,6 +32,11 @@ export type Tx = BaseTx & {
   confirmations: number
 }
 
+export type TxRef = {
+  hash: string
+  timestamp: number
+}
+
 /**
  * Bridge transaction data.
  * These values are set in exchange transactions created by Bridge.

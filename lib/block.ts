@@ -27,6 +27,11 @@ export type Block = {
   txCount: number
 }
 
+export type BlockRef = {
+  height: number
+  hash: string
+}
+
 export type BlocksParams = {
   noEmpty?: 1 | 0
   limit?: number

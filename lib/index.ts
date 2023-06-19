@@ -10,6 +10,7 @@ export * as session from './session'
 export * as stake from './stake'
 export * as token from './token'
 export * as tx from './tx'
+export * as wallet from './wallet'
 
 import { SuperAgentRequest } from 'superagent'
 
