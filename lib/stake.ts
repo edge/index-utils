@@ -60,7 +60,7 @@ export type StakeType = 'gateway' | 'governance' | 'host' | 'stargate'
 /**
  * Get information about a stake for a device (node) address.
  */
-export const deviceStake = async (host: string, address: string, cb: RequestCallback): Promise<DeviceStakeInfo> => {
+export const deviceStake = async (host: string, address: string, cb?: RequestCallback): Promise<DeviceStakeInfo> => {
   const url = `${host}/device/${address}/stake`
   const response = cb === undefined ? await superagent.get(url) : await cb(superagent.get(url))
   return response.body
