@@ -47,7 +47,7 @@ export type StakeType = 'gateway' | 'governance' | 'host' | 'stargate';
 /**
  * Get information about a stake for a device (node) address.
  */
-export declare const deviceStake: (host: string, address: string, cb: RequestCallback) => Promise<DeviceStakeInfo>;
+export declare const deviceStake: (host: string, address: string, cb?: RequestCallback) => Promise<DeviceStakeInfo>;
 /**
  * Get a list of transactions reflecting the history of actions for a stake.
  */
